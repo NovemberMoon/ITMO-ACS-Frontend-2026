@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Публикация рецепта — GustoLab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Авторизованная навигация -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                </a>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="index.html" class="gl-btn gl-btn-outline text-dark btn-sm"><i
+                            class="bi bi-arrow-left"></i>В каталог</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5" style="max-width: 860px;">
+        <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
+            <h2 class="fw-bold mb-1">Публикация нового рецепта</h2>
+            <p class="text-secondary small mb-4">Поделитесь своим авторским блюдом, пошаговыми инструкциями и списком
+                ингредиентов.</p>
+
+            <form id="createRecipeForm">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Название блюда *</label>
+                    <input type="text" name="title" class="form-control"
+                        placeholder="Например: Неаполитанская пицца Маргарита" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Описание блюда</label>
+                    <textarea name="description" class="form-control" rows="2"
+                        placeholder="Особенности вкуса, подача или кулинарная предыстория..."></textarea>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Сложность приготовления *</label>
+                        <select name="difficulty" class="form-select" required>
+                            <option value="easy">Легко</option>
+                            <option value="medium" selected>Средне</option>
+                            <option value="hard">Сложно</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Время приготовления (в минутах) *</label>
+                        <input type="number" name="cooking_time_minutes" class="form-control" min="1" value="35"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Компонент выбора главного фото -->
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold">Главная фотография готового блюда *</label>
+                    <div class="gl-upload-zone" id="recipeDropZone">
+                        <i class="bi bi-cloud-arrow-up display-5 text-secondary d-block mb-2"></i>
+                        <span class="fw-semibold small d-block mb-1">Перетащите изображение сюда или выберите
+                            файл</span>
+                        <span class="text-muted smaller d-block mb-3">Поддерживаются JPG, PNG, WEBP до 10 МБ</span>
+                        <input type="file" id="recipeImageFileInput" class="d-none" accept="image/*">
+                        <button type="button" class="gl-btn gl-btn-outline btn-sm"
+                            onclick="document.getElementById('recipeImageFileInput').click()">
+                            <i class="bi bi-folder2-open"></i>Выбрать фото на диске
+                        </button>
+                    </div>
+                    <div id="recipeImagePreviewContainer" class="mt-3 d-none text-center">
+                        <div class="position-relative d-inline-block">
+                            <img id="recipeImagePreview" src="" class="gl-preview-img" alt="Превью">
+                            <button type="button"
+                                class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle"
+                                id="removeRecipeImageBtn" style="width: 28px; height: 28px; padding: 0;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold">Ссылка на видеоурок приготовления</label>
+                    <input type="url" name="video_url" class="form-control"
+                        placeholder="https://youtube.com/watch?v=...">
+                </div>
+
+                <!-- Ингредиенты блюда -->
+                <hr class="my-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-0">Ингредиенты блюда</h5>
+                        <small class="text-secondary">Укажите продукты и точные единицы измерения</small>
+                    </div>
+                    <button type="button" class="gl-btn gl-btn-outline btn-sm" id="addIngredientRowBtn">
+                        <i class="bi bi-plus-lg"></i>Добавить продукт
+                    </button>
+                </div>
+                <div id="ingredientsContainer" class="mb-4">
+                    <div class="row g-2 ingredient-row mb-2">
+                        <div class="col-6"><input type="text" class="form-control form-control-sm"
+                                placeholder="Название продукта" value="Мука пшеничная" required></div>
+                        <div class="col-3"><input type="number" step="0.1" min="0.1"
+                                class="form-control form-control-sm" placeholder="Количество" value="300" required>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-select form-select-sm" required>
+                                <option value="g" selected>г</option>
+                                <option value="ml">мл</option>
+                                <option value="pcs">шт</option>
+                                <option value="tbsp">ст. л.</option>
+                                <option value="tsp">ч. л.</option>
+                            </select>
+                        </div>
+                        <div class="col-1 text-center"><button type="button"
+                                class="btn btn-sm text-danger remove-row-btn" title="Удалить"><i
+                                    class="bi bi-trash"></i></button></div>
+                    </div>
+                </div>
+
+                <!-- Шаги приготовления -->
+                <hr class="my-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-0">Шаги приготовления</h5>
+                        <small class="text-secondary">Опишите процесс и при необходимости прикрепите фото шага</small>
+                    </div>
+                    <button type="button" class="gl-btn gl-btn-outline btn-sm" id="addStepRowBtn">
+                        <i class="bi bi-plus-lg"></i>Добавить шаг
+                    </button>
+                </div>
+                <div id="stepsContainer" class="mb-4">
+                    <div class="step-row card p-3 mb-3 bg-light border-0 rounded-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold small step-index">Шаг 1</span>
+                            <button type="button" class="btn btn-sm text-danger remove-step-btn" title="Удалить шаг"><i
+                                    class="bi bi-trash"></i></button>
+                        </div>
+                        <textarea class="form-control form-control-sm mb-2" rows="2"
+                            placeholder="Опишите процесс приготовления..."
+                            required>Замесите эластичное тесто и оставьте на 24 часа для холодной ферментации.</textarea>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" class="form-control form-control-sm step-file-input" accept="image/*">
+                            <span class="text-muted smaller">Фото шага (опционально)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="gl-btn gl-btn-primary w-100 py-2.5 fw-bold">Опубликовать рецепт</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer-gl py-4 mt-auto text-center small">
+        &copy; 2026 GustoLab. Университет ИТМО.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
