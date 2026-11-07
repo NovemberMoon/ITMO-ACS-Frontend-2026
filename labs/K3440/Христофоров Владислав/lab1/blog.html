@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кулинарный блог — GustoLab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Авторизованная навигация -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav me-auto ms-lg-3 mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Рецепты</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="blog.html">Кулинарный блог</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="create-blog-post.html" class="gl-btn gl-btn-primary btn-sm">
+                            <i class="bi bi-pencil-square"></i>Написать статью
+                        </a>
+                        <div class="d-flex align-items-center ps-3 border-start border-secondary">
+                            <a href="profile.html"
+                                class="d-flex align-items-center text-decoration-none text-light me-3">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=100&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;"
+                                    alt="Шеф">
+                                <span class="small fw-semibold">Алексей С.</span>
+                            </a>
+                            <a href="login.html" class="btn btn-outline-danger btn-sm py-1 px-2" title="Выйти">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5" style="max-width: 900px;">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Статьи и гастрономические заметки</h2>
+                <p class="text-secondary small mb-0">Секреты технологий приготовления, разбор специй и истории кухонь
+                    мира.</p>
+            </div>
+            <div style="min-width: 260px;">
+                <input type="text" id="blogSearchInput" class="form-control form-control-sm"
+                    placeholder="Поиск по статьям...">
+            </div>
+        </div>
+
+        <!-- Пустое состояние блога -->
+        <div id="blogEmptyState" class="gl-empty-state d-none mb-4">
+            <i class="bi bi-journal-x display-5 text-muted d-block mb-2"></i>
+            <h5 class="fw-bold mb-1">Публикации не найдены</h5>
+            <p class="text-secondary small mb-0">Попробуйте ввести другой запрос для поиска статей.</p>
+        </div>
+
+        <!-- Список статей -->
+        <div class="d-flex flex-column gap-4" id="blogList">
+            <!-- Статья 1 -->
+            <article class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 blog-card"
+                data-title="Азиатские пряности: баланс пяти вкусов в домашней кухне">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&auto=format&fit=crop&q=80"
+                            class="img-fluid rounded-3 w-100" style="height: 200px; object-fit: cover;" alt="Специи">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <a href="author.html" class="text-secondary small fw-semibold text-decoration-none">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=60&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-1" style="width: 22px; height: 22px; object-fit: cover;"
+                                    alt="Автор">
+                                Алексей Смирнов
+                            </a>
+                            <span class="text-muted small">&bull; 15 мая 2026</span>
+                        </div>
+                        <h4 class="fw-bold fs-5 mb-2">
+                            <a href="blog-post.html" class="text-dark">Азиатские пряности: баланс пяти вкусов в домашней
+                                кухне</a>
+                        </h4>
+                        <p class="text-secondary small mb-3">Как правильно раскрывать эфирные масла сухого кориандра,
+                            сычуаньского перца и бадьяна на воке без подгорания.</p>
+                        <div class="d-flex justify-content-between align-items-center small text-secondary">
+                            <div>
+                                <span class="me-3"><i class="bi bi-heart-fill text-danger me-1"></i>42 лайка</span>
+                                <span><i class="bi bi-chat-left-text me-1"></i>8 комментариев</span>
+                            </div>
+                            <a href="blog-post.html" class="fw-bold">Читать далее &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Статья 2 -->
+            <article class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 blog-card"
+                data-title="Секреты длительной холодной ферментации теста">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80"
+                            class="img-fluid rounded-3 w-100" style="height: 200px; object-fit: cover;" alt="Хлеб">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <a href="author.html" class="text-secondary small fw-semibold text-decoration-none">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-1" style="width: 22px; height: 22px; object-fit: cover;"
+                                    alt="Автор">
+                                Мария Моретти
+                            </a>
+                            <span class="text-muted small">&bull; 12 мая 2026</span>
+                        </div>
+                        <h4 class="fw-bold fs-5 mb-2">
+                            <a href="blog-post.html" class="text-dark">Секреты длительной холодной ферментации теста</a>
+                        </h4>
+                        <p class="text-secondary small mb-3">Почему выдержка теста при температуре 4°C в течение 48
+                            часов делает неаполитанскую пиццу легкой и воздушной.</p>
+                        <div class="d-flex justify-content-between align-items-center small text-secondary">
+                            <div>
+                                <span class="me-3"><i class="bi bi-heart-fill text-danger me-1"></i>89 лайков</span>
+                                <span><i class="bi bi-chat-left-text me-1"></i>14 комментариев</span>
+                            </div>
+                            <a href="blog-post.html" class="fw-bold">Читать далее &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Пагинация блога -->
+        <nav aria-label="Навигация по блогу" class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer class="footer-gl py-4 mt-auto text-center small">
+        &copy; 2026 GustoLab. Университет ИТМО.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
