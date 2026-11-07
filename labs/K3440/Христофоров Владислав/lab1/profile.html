@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой кабинет — GustoLab</title>
+    <title>Мой профиль — GustoLab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,14 +15,15 @@
 
 <body>
 
-    <!-- Авторизованная навигация -->
+    <!-- Navigation -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                    aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navContent">
@@ -32,8 +33,8 @@
                     </ul>
                     <div class="d-flex align-items-center gap-3">
                         <div class="dropdown">
-                            <button class="gl-btn gl-btn-primary btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown">
+                            <button class="gl-btn gl-btn-primary gl-btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-plus-lg"></i>Создать
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0">
@@ -43,7 +44,19 @@
                                             class="bi bi-pencil-square me-2 text-success"></i>Новая статья</a></li>
                             </ul>
                         </div>
-                        <a href="login.html" class="btn btn-outline-danger btn-sm">Выйти</a>
+                        <div class="d-flex align-items-center ps-3 border-start border-secondary">
+                            <a href="profile.html"
+                                class="d-flex align-items-center text-decoration-none text-light me-3">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=100&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;"
+                                    alt="Шеф-повар">
+                                <span class="small fw-semibold">Алексей С.</span>
+                            </a>
+                            <a href="login.html" class="btn btn-outline-danger btn-sm py-1 px-2"
+                                title="Выйти из аккаунта">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,7 +64,7 @@
     </header>
 
     <main class="container my-5">
-        <!-- Шапка профиля -->
+        <!-- User Profile Header -->
         <div class="card shadow-sm border-0 rounded-4 mb-4 p-4 bg-white">
             <div class="d-flex flex-column flex-md-row align-items-center gap-4">
                 <img id="myAvatarImg"
@@ -61,7 +74,9 @@
                     <div
                         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
                         <h3 class="fw-bold mb-0" id="myUsernameText">Алексей Смирнов</h3>
-                        <span class="text-muted small">@alex_chef</span>
+                        <span class="text-muted small" id="myHandleText">@alex_chef</span>
+                        <span class="badge bg-light text-secondary border ms-1" id="mySpecialtyText">Шеф-повар
+                            паназиатской кухни</span>
                     </div>
                     <p class="text-secondary small mb-3" id="myBioText">Шеф-повар и исследователь паназиатской кухни.
                         Делюсь проверенными рецептами и техникой термообработки специй.</p>
@@ -74,9 +89,8 @@
                         <span><strong>412</strong> подписчиков</span>
                     </div>
                 </div>
-                <!-- Кнопка открытия редактирования профиля -->
                 <div>
-                    <button type="button" class="gl-btn gl-btn-outline btn-sm" data-bs-toggle="modal"
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" data-bs-toggle="modal"
                         data-bs-target="#editProfileModal">
                         <i class="bi bi-pencil-square"></i>Редактировать профиль
                     </button>
@@ -84,31 +98,31 @@
             </div>
         </div>
 
-        <!-- Табы личного кабинета -->
+        <!-- Tabs Navigation -->
         <ul class="nav nav-pills mb-4 gap-2" id="profileTabs">
             <li class="nav-item">
                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabMyRecipes">Мои рецепты</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSavedRecipes">Сохранённые
-                    закладки</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSavedRecipes">Закладки</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabMyBlogs">Мои статьи блога</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabMyBlogs">Мои статьи</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscriptions">Мои подписки</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscriptions">Подписки</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscribers">Мои подписчики</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscribers">Подписчики</button>
             </li>
             <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSecurity">Настройки</button>
             </li>
         </ul>
 
+        <!-- Tabs Content -->
         <div class="tab-content" id="profileTabsContent">
-            <!-- 1. Мои рецепты -->
+            <!-- Tab 1: My Recipes -->
             <div class="tab-pane fade show active" id="tabMyRecipes">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     <div class="col">
@@ -120,8 +134,8 @@
                                 <h6 class="fw-bold mb-1">Том Ям Кунг с тигровыми креветками</h6>
                                 <p class="text-secondary small mb-2">35 минут &bull; Сложность: Средне</p>
                                 <div class="d-flex gap-2">
-                                    <a href="recipe.html" class="gl-btn gl-btn-outline btn-sm">Просмотр</a>
-                                    <a href="edit-recipe.html" class="gl-btn gl-btn-outline btn-sm"><i
+                                    <a href="recipe.html" class="gl-btn gl-btn-outline gl-btn-sm">Просмотр</a>
+                                    <a href="edit-recipe.html" class="gl-btn gl-btn-outline gl-btn-sm"><i
                                             class="bi bi-pencil"></i>Изменить</a>
                                 </div>
                             </div>
@@ -130,7 +144,7 @@
                 </div>
             </div>
 
-            <!-- 2. Сохранённые закладки -->
+            <!-- Tab 2: Saved -->
             <div class="tab-pane fade" id="tabSavedRecipes">
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     <div class="col">
@@ -142,8 +156,8 @@
                                 <h6 class="fw-bold mb-1">Неаполитанская пицца Маргарита</h6>
                                 <p class="text-secondary small mb-2">Автор: Шеф Джованни</p>
                                 <div class="d-flex gap-2">
-                                    <a href="recipe.html" class="gl-btn gl-btn-outline btn-sm">Открыть</a>
-                                    <button type="button" class="gl-btn gl-btn-danger-outline btn-sm"><i
+                                    <a href="recipe.html" class="gl-btn gl-btn-outline gl-btn-sm">Открыть</a>
+                                    <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm"><i
                                             class="bi bi-bookmark-x"></i>Убрать</button>
                                 </div>
                             </div>
@@ -152,24 +166,24 @@
                 </div>
             </div>
 
-            <!-- 3. Мои статьи -->
+            <!-- Tab 3: My Blog Posts -->
             <div class="tab-pane fade" id="tabMyBlogs">
                 <div class="card border-0 shadow-sm p-3 bg-white rounded-4">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                         <div>
                             <h6 class="fw-bold mb-1">Азиатские пряности: баланс пяти вкусов в домашней кухне</h6>
-                            <p class="text-secondary small mb-0">15 мая 2026 &bull; 42 лайка &bull; 8 комментариев</p>
+                            <p class="text-secondary small mb-0">15 мая 2026 &bull; 42 отметки &bull; 8 комментариев</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <a href="blog-post.html" class="gl-btn gl-btn-outline btn-sm">Читать</a>
-                            <a href="edit-blog-post.html" class="gl-btn gl-btn-outline btn-sm"><i
+                            <a href="blog-post.html" class="gl-btn gl-btn-outline gl-btn-sm">Читать</a>
+                            <a href="edit-blog-post.html" class="gl-btn gl-btn-outline gl-btn-sm"><i
                                     class="bi bi-pencil"></i>Изменить</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. Мои подписки (кого читаю я) -->
+            <!-- Tab 4: Subscriptions -->
             <div class="tab-pane fade" id="tabSubscriptions">
                 <div class="card border-0 shadow-sm p-3 bg-white rounded-4">
                     <div class="d-flex justify-content-between align-items-center">
@@ -182,14 +196,14 @@
                                 <small class="text-secondary">Мастер неаполитанской кухни</small>
                             </div>
                         </div>
-                        <button type="button" class="gl-toggle-btn active-sub btn-sm author-sub-btn">
+                        <button type="button" class="gl-toggle-btn active-sub author-sub-btn">
                             <span>Вы подписаны</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 5. Мои подписчики (кто читает меня) -->
+            <!-- Tab 5: Followers -->
             <div class="tab-pane fade" id="tabSubscribers">
                 <div class="card border-0 shadow-sm p-3 bg-white rounded-4">
                     <div class="d-flex justify-content-between align-items-center">
@@ -203,29 +217,29 @@
                                 <small class="text-secondary">Любитель азиатских супов и вока</small>
                             </div>
                         </div>
-                        <button type="button" class="gl-toggle-btn btn-sm author-sub-btn">
+                        <button type="button" class="gl-toggle-btn author-sub-btn">
                             <span>Подписаться в ответ</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 6. Настройки аккаунта -->
+            <!-- Tab 6: Account Settings -->
             <div class="tab-pane fade" id="tabSecurity">
                 <div class="card border-0 shadow-sm p-4 bg-white rounded-4 mb-4">
-                    <h5 class="fw-bold mb-3">Параметры безопасности</h5>
-                    <p class="text-secondary small mb-4">Управление учётной записью шеф-повара и сессиями входа.</p>
+                    <h5 class="fw-bold mb-3">Настройки аккаунта</h5>
+                    <p class="text-secondary small mb-4">Управление учётной записью шеф-повара и безопасностью.</p>
 
-                    <div class="gl-danger-zone">
-                        <h6 class="fw-bold text-danger mb-2"><i class="bi bi-exclamation-octagon me-2"></i>
-                            Удаление аккаунта</h6>
+                    <div class="gl-danger-box">
+                        <h6 class="fw-bold text-danger mb-2"><i class="bi bi-shield-exclamation me-2"></i>Удаление
+                            профиля</h6>
                         <p class="text-secondary small mb-3">
-                            Удаление аккаунта приведёт к снятию с публикации всех ваших рецептов, комментариев и
-                            закладок. Это действие может быть отменено только через службу модерации.
+                            При удалении профиля все ваши опубликованные рецепты, статьи и комментарии будут скрыты из
+                            общего каталога.
                         </p>
-                        <button type="button" class="gl-btn gl-btn-danger btn-sm" data-bs-toggle="modal"
+                        <button type="button" class="gl-btn gl-btn-danger gl-btn-sm" data-bs-toggle="modal"
                             data-bs-target="#deleteAccountModal">
-                            <i class="bi bi-trash"></i>Удалить учётную запись
+                            <i class="bi bi-trash"></i>Удалить профиль
                         </button>
                     </div>
                 </div>
@@ -233,12 +247,12 @@
         </div>
     </main>
 
-    <!-- Модальное окно редактирования профиля -->
+    <!-- Edit Profile Modal -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold">Редактирование профиля шефа</h5>
+                    <h5 class="modal-title fw-bold">Редактирование профиля</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <form id="editProfileForm">
@@ -249,7 +263,7 @@
                                 class="gl-avatar-preview mb-2" alt="Аватар">
                             <input type="file" id="editAvatarFileInput" class="d-none" accept="image/*">
                             <div>
-                                <button type="button" class="gl-btn gl-btn-outline btn-sm"
+                                <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                                     onclick="document.getElementById('editAvatarFileInput').click()">
                                     <i class="bi bi-camera"></i>Сменить фото профиля
                                 </button>
@@ -257,46 +271,75 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold">Краткая биография (bio)</label>
+                            <label class="form-label small fw-semibold">Отображаемое имя *</label>
+                            <input type="text" id="editNameInput" class="form-control" value="Алексей Смирнов" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Кулинарная специализация</label>
+                            <input type="text" id="editSpecialtyInput" class="form-control"
+                                value="Шеф-повар паназиатской кухни">
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Имя пользователя (логин)</label>
+                                <input type="text" class="form-control" value="alex_chef" readonly>
+                                <span class="text-muted smaller">Не подлежит смене</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Электронная почта</label>
+                                <input type="email" class="form-control" value="alex_chef@gustolab.ru" readonly>
+                                <span class="text-muted smaller">Привязан к аккаунту</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">Краткая информация о себе (bio)</label>
                             <textarea name="bio" id="editBioInput" class="form-control"
                                 rows="3">Шеф-повар и исследователь паназиатской кухни. Делюсь проверенными рецептами и техникой термообработки специй.</textarea>
                         </div>
                     </div>
                     <div class="modal-footer bg-light border-0 py-2">
-                        <button type="button" class="gl-btn gl-btn-outline btn-sm"
+                        <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                             data-bs-dismiss="modal">Отмена</button>
-                        <button type="submit" class="gl-btn gl-btn-primary btn-sm">Сохранить</button>
+                        <button type="submit" class="gl-btn gl-btn-primary gl-btn-sm">Сохранить</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно подтверждения удаления аккаунта -->
+    <!-- Delete Account Modal -->
     <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
                     <h5 class="modal-title fw-bold text-white"><i
-                            class="bi bi-exclamation-triangle-fill me-2"></i>Удаление аккаунта</h5>
+                            class="bi bi-exclamation-triangle-fill me-2"></i>Удаление профиля</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <p class="mb-2 fw-semibold">Вы действительно хотите удалить свою учётную запись?</p>
-                    <p class="small text-secondary mb-0">Все ваши опубликованные рецепты и статьи станут недоступны
-                        другим пользователям платформы.</p>
+                    <p class="mb-2 fw-semibold">Вы действительно хотите удалить свой профиль?</p>
+                    <p class="small text-secondary mb-0">Ваши рецепты и публикации перестанут отображаться другим
+                        пользователям сообщества.</p>
                 </div>
                 <div class="modal-footer bg-light border-0 py-2">
-                    <button type="button" class="gl-btn gl-btn-outline btn-sm" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
+                        data-bs-dismiss="modal">Отмена</button>
                     <a href="login.html" class="btn btn-danger btn-sm">Подтвердить удаление</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="footer-gl py-4 mt-auto text-center small">
-        &copy; 2026 GustoLab. Университет ИТМО.
+    <!-- Footer -->
+    <footer class="gl-footer py-4 mt-auto">
+        <div class="container text-center small">
+            <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
+            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

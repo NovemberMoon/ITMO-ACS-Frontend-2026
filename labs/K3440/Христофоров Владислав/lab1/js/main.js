@@ -2,18 +2,76 @@
  * GustoLab — Единый клиентский скрипт управления интерфейсом
  */
 document.addEventListener("DOMContentLoaded", () => {
-    // =========================================================================
-    // 1. Многофакторный фильтр каталога рецептов (поиск, тип блюда, сложность, ингредиенты)
-    // =========================================================================
+    // --- 1. Catalog Multi-Factor Filter (Search, Category, Difficulty, Ingredient Tags) ---
     const searchInput = document.getElementById("searchInput");
     const categoryFilter = document.getElementById("categoryFilter");
     const difficultyFilter = document.getElementById("difficultyFilter");
     const resetFiltersBtn = document.getElementById("resetFiltersBtn");
     const recipeItems = document.querySelectorAll(".recipe-item");
     const recipesEmptyState = document.getElementById("recipesEmptyState");
-    const ingredientChips = document.querySelectorAll(".gl-filter-chip");
+
+    const ingredientInput = document.getElementById("ingredientInput");
+    const addIngredientTagBtn = document.getElementById("addIngredientTagBtn");
+    const selectedIngredientsContainer = document.getElementById("selectedIngredientsContainer");
+    const quickIngredientBadges = document.querySelectorAll(".gl-quick-tag");
 
     const selectedIngredients = new Set();
+
+    function renderSelectedTags() {
+        if (!selectedIngredientsContainer) return;
+        selectedIngredientsContainer.innerHTML = "";
+        selectedIngredients.forEach((ing) => {
+            const tag = document.createElement("span");
+            tag.className = "gl-filter-tag";
+            tag.innerHTML = `
+        ${ing}
+        <button type="button" class="gl-filter-tag-remove" data-ingredient="${ing}">&times;</button>
+      `;
+            selectedIngredientsContainer.appendChild(tag);
+        });
+    }
+
+    function addIngredient(val) {
+        const clean = val.trim().toLowerCase();
+        if (!clean || selectedIngredients.has(clean)) return;
+        selectedIngredients.add(clean);
+        renderSelectedTags();
+        filterRecipes();
+    }
+
+    if (addIngredientTagBtn && ingredientInput) {
+        addIngredientTagBtn.addEventListener("click", () => {
+            addIngredient(ingredientInput.value);
+            ingredientInput.value = "";
+        });
+
+        ingredientInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                addIngredient(ingredientInput.value);
+                ingredientInput.value = "";
+            }
+        });
+    }
+
+    quickIngredientBadges.forEach((badge) => {
+        badge.addEventListener("click", () => {
+            const ing = badge.getAttribute("data-ingredient");
+            addIngredient(ing);
+        });
+    });
+
+    if (selectedIngredientsContainer) {
+        selectedIngredientsContainer.addEventListener("click", (e) => {
+            const removeBtn = e.target.closest(".gl-filter-tag-remove");
+            if (removeBtn) {
+                const ing = removeBtn.getAttribute("data-ingredient");
+                selectedIngredients.delete(ing);
+                renderSelectedTags();
+                filterRecipes();
+            }
+        });
+    }
 
     function filterRecipes() {
         const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
@@ -32,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const matchCat = category === "all" || cardCat === category;
             const matchDiff = difficulty === "all" || cardDiff === difficulty;
 
-            // Проверка совпадения по всем выбранным ингредиентам
             let matchIngredients = true;
             if (selectedIngredients.size > 0) {
                 for (const ing of selectedIngredients) {
@@ -53,21 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Обработка клика по чипсам ингредиентов
-    ingredientChips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-            const ing = chip.getAttribute("data-ingredient").toLowerCase();
-            if (selectedIngredients.has(ing)) {
-                selectedIngredients.delete(ing);
-                chip.classList.remove("active");
-            } else {
-                selectedIngredients.add(ing);
-                chip.classList.add("active");
-            }
-            filterRecipes();
-        });
-    });
-
     if (searchInput) searchInput.addEventListener("input", filterRecipes);
     if (categoryFilter) categoryFilter.addEventListener("change", filterRecipes);
     if (difficultyFilter) difficultyFilter.addEventListener("change", filterRecipes);
@@ -77,15 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (searchInput) searchInput.value = "";
             if (categoryFilter) categoryFilter.value = "all";
             if (difficultyFilter) difficultyFilter.value = "all";
+            if (ingredientInput) ingredientInput.value = "";
             selectedIngredients.clear();
-            ingredientChips.forEach((chip) => chip.classList.remove("active"));
+            renderSelectedTags();
             filterRecipes();
         });
     }
 
-    // =========================================================================
-    // 2. Поиск по статьям кулинарного блога
-    // =========================================================================
+    // --- 2. Blog Search ---
     const blogSearchInput = document.getElementById("blogSearchInput");
     const blogCards = document.querySelectorAll(".blog-card");
     const blogEmptyState = document.getElementById("blogEmptyState");
@@ -108,9 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================================================================
-    // 3. Модальное окно быстрого просмотра
-    // =========================================================================
+    // --- 3. Quick View Modal ---
     const quickModalEl = document.getElementById("quickViewModal");
     if (quickModalEl) {
         const quickModal = new bootstrap.Modal(quickModalEl);
@@ -126,15 +165,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 mTime.textContent = btn.getAttribute("data-time");
                 mDiff.textContent = btn.getAttribute("data-difficulty");
                 mDesc.textContent = btn.getAttribute("data-desc");
-                mIngr.textContent = btn.getAttribute("data-ingredients") || "Список продуктов доступен на детальной странице.";
+                mIngr.textContent = btn.getAttribute("data-ingredients") || "Список продуктов доступен на странице рецепта.";
                 quickModal.show();
             });
         });
     }
 
-    // =========================================================================
-    // 4. Калькулятор порций на странице рецепта
-    // =========================================================================
+    // --- 4. Recipe Portions Calculator ---
     const baseServings = 2;
     let currentServings = 2;
     const servingsDisplay = document.getElementById("servingsCount");
@@ -170,9 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (decBtn) decBtn.addEventListener("click", () => updateServings(currentServings - 1));
     if (incBtn) incBtn.addEventListener("click", () => updateServings(currentServings + 1));
 
-    // =========================================================================
-    // 5. Чек-лист покупок ингредиентов
-    // =========================================================================
+    // --- 5. Recipe Ingredients Checklist ---
     const ingrList = document.getElementById("ingredientsList");
     if (ingrList) {
         ingrList.addEventListener("click", (e) => {
@@ -181,9 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================================================================
-    // 6. Системные реакции: Лайки и Закладки
-    // =========================================================================
+    // --- 6. Social Reactions & Counters ---
     const likeRecipeBtn = document.getElementById("likeRecipeBtn");
     if (likeRecipeBtn) {
         let liked = false;
@@ -193,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const text = document.getElementById("likeText");
             if (text) {
                 let count = parseInt(text.textContent, 10);
-                text.textContent = liked ? (count + 1) : (count - 1);
+                text.textContent = liked ? count + 1 : count - 1;
             }
         });
     }
@@ -218,14 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const count = document.getElementById("likeBlogCount");
             if (count) {
                 let val = parseInt(count.textContent, 10);
-                count.textContent = blogLiked ? (val + 1) : (val - 1);
+                count.textContent = blogLiked ? val + 1 : val - 1;
             }
         });
     }
 
-    // =========================================================================
-    // 7. Единая логика подписок на авторов
-    // =========================================================================
     document.querySelectorAll(".author-sub-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
             const isActive = btn.classList.contains("active-sub");
@@ -244,9 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // =========================================================================
-    // 8. Модерация комментариев: инлайн-редактирование и модальное окно удаления
-    // =========================================================================
+    // --- 7. Comment Management (Inline Edit & Custom Modal Delete) ---
     let targetCommentToDelete = null;
     const deleteCommentModalEl = document.getElementById("deleteCommentModal");
     let deleteCommentModalInstance = null;
@@ -273,7 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const editBtn = e.target.closest(".edit-comment-btn");
             const delBtn = e.target.closest(".delete-comment-btn");
 
-            // 8.1. Инлайн-редактирование
             if (editBtn) {
                 const item = editBtn.closest(".comment-item");
                 if (item.querySelector(".inline-edit-box")) return;
@@ -287,8 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 editBox.innerHTML = `
           <textarea class="form-control form-control-sm mb-2 inline-edit-textarea" rows="2">${currentText}</textarea>
           <div class="d-flex gap-2 justify-content-end">
-            <button type="button" class="gl-btn gl-btn-outline btn-sm cancel-inline-edit-btn py-1 px-2.5">Отмена</button>
-            <button type="button" class="gl-btn gl-btn-primary btn-sm save-inline-edit-btn py-1 px-2.5">Сохранить</button>
+            <button type="button" class="gl-btn gl-btn-outline gl-btn-sm cancel-inline-edit-btn">Отмена</button>
+            <button type="button" class="gl-btn gl-btn-primary gl-btn-sm save-inline-edit-btn">Сохранить</button>
           </div>
         `;
 
@@ -313,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // 8.2. Удаление отзыва через кастомное модальное окно
             if (delBtn) {
                 targetCommentToDelete = delBtn.closest(".comment-item");
                 if (deleteCommentModalInstance) {
@@ -331,7 +357,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const blogCommentsList = document.getElementById("blogCommentsList");
     bindCommentActions(blogCommentsList);
 
-    // Форма добавления комментария к рецепту
     const addCommentForm = document.getElementById("addCommentForm");
     if (addCommentForm) {
         addCommentForm.addEventListener("submit", (e) => {
@@ -360,9 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================================================================
-    // 9. Редактирование профиля и локальное превью аватара
-    // =========================================================================
+    // --- 8. Profile & Media Previews (FileReader) ---
     const editProfileForm = document.getElementById("editProfileForm");
     const editAvatarFileInput = document.getElementById("editAvatarFileInput");
     const editModalAvatarPreview = document.getElementById("editModalAvatarPreview");
@@ -385,10 +408,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editProfileForm) {
         editProfileForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            const newName = document.getElementById("editNameInput") ? document.getElementById("editNameInput").value : "";
+            const newSpecialty = document.getElementById("editSpecialtyInput") ? document.getElementById("editSpecialtyInput").value : "";
             const newBio = document.getElementById("editBioInput").value;
+            const myUsernameText = document.getElementById("myUsernameText");
+            const mySpecialtyText = document.getElementById("mySpecialtyText");
             const myBioText = document.getElementById("myBioText");
             const myAvatarImg = document.getElementById("myAvatarImg");
 
+            if (newName && myUsernameText) myUsernameText.textContent = newName;
+            if (newSpecialty && mySpecialtyText) mySpecialtyText.textContent = newSpecialty;
             if (myBioText) myBioText.textContent = newBio;
             if (myAvatarImg && stagedAvatarUrl) myAvatarImg.src = stagedAvatarUrl;
 
@@ -398,9 +427,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================================================================
-    // 10. Превью загрузки фотографии рецепта
-    // =========================================================================
     const fileInput = document.getElementById("recipeImageFileInput");
     const previewBox = document.getElementById("recipeImagePreviewContainer");
     const previewImg = document.getElementById("recipeImagePreview");
@@ -431,9 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // =========================================================================
-    // 11. Динамическое добавление ингредиентов и шагов в конструкторе
-    // =========================================================================
+    // --- 9. Dynamic Form Rows (Ingredients & Steps for Create and Edit) ---
     const addIngrBtn = document.getElementById("addIngredientRowBtn");
     const ingrContainer = document.getElementById("ingredientsContainer");
     if (addIngrBtn && ingrContainer) {
@@ -479,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <textarea class="form-control form-control-sm mb-2" rows="2" placeholder="Опишите процесс приготовления..." required></textarea>
         <div class="d-flex align-items-center gap-2">
           <input type="file" class="form-control form-control-sm step-file-input" accept="image/*">
-          <span class="text-muted smaller">Фото шага (опционально)</span>
+          <span class="text-muted smaller">Фото шага (по желанию)</span>
         </div>
       `;
             stepsContainer.appendChild(card);

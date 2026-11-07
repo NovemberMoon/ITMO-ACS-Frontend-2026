@@ -15,29 +15,58 @@
 
 <body>
 
-    <!-- Авторизованная навигация -->
+    <!-- Navigation -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
                 </a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto ms-lg-3">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                    aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav me-auto ms-lg-3 mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.html">Рецепты</a></li>
                         <li class="nav-item"><a class="nav-link" href="blog.html">Кулинарный блог</a></li>
                     </ul>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="profile.html" class="gl-btn gl-btn-outline text-dark btn-sm"><i
-                            class="bi bi-person"></i>Мой кабинет</a>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown">
+                            <button class="gl-btn gl-btn-primary gl-btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-plus-lg"></i>Создать
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                                <li><a class="dropdown-item py-2" href="create-recipe.html"><i
+                                            class="bi bi-journal-plus me-2 text-danger"></i>Новый рецепт</a></li>
+                                <li><a class="dropdown-item py-2" href="create-blog-post.html"><i
+                                            class="bi bi-pencil-square me-2 text-success"></i>Новая статья</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex align-items-center ps-3 border-start border-secondary">
+                            <a href="profile.html"
+                                class="d-flex align-items-center text-decoration-none text-light me-3">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=100&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;"
+                                    alt="Шеф-повар">
+                                <span class="small fw-semibold">Алексей С.</span>
+                            </a>
+                            <a href="login.html" class="btn btn-outline-danger btn-sm py-1 px-2"
+                                title="Выйти из аккаунта">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
     <main class="container my-5">
-        <!-- Публичная карточка автора -->
+        <a href="index.html" class="gl-back-link"><i class="bi bi-arrow-left me-1"></i>Назад в каталог</a>
+
+        <!-- Author Card -->
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 mb-5 bg-white">
             <div class="d-flex flex-column flex-md-row align-items-center gap-4">
                 <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=300&auto=format&fit=crop&q=80"
@@ -59,7 +88,6 @@
                         <span><strong>1</strong> статья</span>
                         <span><strong id="followersCount">412</strong> подписчиков</span>
                     </div>
-                    <!-- Кнопка подписки -->
                     <button type="button" class="gl-toggle-btn author-sub-btn" id="mainAuthorSubBtn">
                         <i class="bi bi-person-plus"></i><span>Подписаться на автора</span>
                     </button>
@@ -67,7 +95,7 @@
             </div>
         </div>
 
-        <!-- Рецепты и статьи шефа -->
+        <!-- Author Works -->
         <div class="row g-4">
             <div class="col-lg-8">
                 <h4 class="fw-bold mb-3">Опубликованные рецепты</h4>
@@ -80,7 +108,7 @@
                         <h5 class="fw-bold fs-6 mb-1"><a href="recipe.html" class="text-dark">Том Ям Кунг с тигровыми
                                 креветками</a></h5>
                         <small class="text-secondary d-block mb-2">35 минут &bull; Сложность: Средне</small>
-                        <a href="recipe.html" class="gl-btn gl-btn-outline btn-sm py-1 px-2.5">Смотреть рецепт</a>
+                        <a href="recipe.html" class="gl-btn gl-btn-outline gl-btn-sm">Смотреть рецепт</a>
                     </div>
                 </div>
 
@@ -88,8 +116,8 @@
                 <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
                     <h5 class="fw-bold fs-6 mb-1"><a href="blog-post.html" class="text-dark">Азиатские пряности: баланс
                             пяти вкусов в домашней кухне</a></h5>
-                    <small class="text-secondary d-block mb-2">Опубликовано 15 мая 2026 &bull; 42 лайка</small>
-                    <a href="blog-post.html" class="gl-btn gl-btn-outline btn-sm py-1 px-2.5">Читать статью</a>
+                    <small class="text-secondary d-block mb-2">Опубликовано 15 мая 2026 &bull; 42 отметки</small>
+                    <a href="blog-post.html" class="gl-btn gl-btn-outline gl-btn-sm">Читать статью</a>
                 </div>
             </div>
 
@@ -103,8 +131,12 @@
         </div>
     </main>
 
-    <footer class="footer-gl py-4 mt-auto text-center small">
-        &copy; 2026 GustoLab. Университет ИТМО.
+    <!-- Footer -->
+    <footer class="gl-footer py-4 mt-auto">
+        <div class="container text-center small">
+            <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
+            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация кулинара — GustoLab</title>
+    <title>Регистрация — GustoLab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,15 +15,15 @@
 
 <body>
 
-    <!-- Гостевая навигация -->
+    <!-- Navigation (Guest) -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
                 </a>
                 <div class="d-flex align-items-center gap-2">
-                    <a href="login.html" class="gl-btn gl-btn-outline text-dark btn-sm">Вход</a>
+                    <a href="login.html" class="gl-btn gl-btn-outline gl-btn-sm text-dark">Вход</a>
                 </div>
             </div>
         </nav>
@@ -33,17 +33,17 @@
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
             <div class="text-center mb-4">
                 <h3 class="fw-bold mb-1">Регистрация шефа</h3>
-                <p class="text-secondary small mb-0">Присоединяйтесь к кулинарному сообществу</p>
+                <p class="text-secondary small mb-0">Присоединяйтесь к кулинарному сообществу GustoLab</p>
             </div>
 
             <form action="index.html">
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Имя пользователя (username) *</label>
+                    <label class="form-label small fw-semibold">Имя пользователя *</label>
                     <input type="text" class="form-control" placeholder="alex_chef" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Электронная почта (email) *</label>
+                    <label class="form-label small fw-semibold">Электронная почта *</label>
                     <input type="email" class="form-control" placeholder="chef@example.com" required>
                 </div>
 
@@ -61,8 +61,12 @@
         </div>
     </main>
 
-    <footer class="footer-gl py-4 mt-auto text-center small">
-        &copy; 2026 GustoLab. Университет ИТМО.
+    <!-- Footer -->
+    <footer class="gl-footer py-4 mt-auto">
+        <div class="container text-center small">
+            <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
+            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

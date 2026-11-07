@@ -1,9 +1,5 @@
-/* ==========================================================================
-   GustoLab Unified Design System
-   ========================================================================== */
-
+/* --- 1. Design Tokens --- */
 :root {
-    /* Палитра брендинга */
     --gl-primary: #b84924;
     --gl-primary-hover: #9c3b1a;
     --gl-primary-tint: #fbeee8;
@@ -30,7 +26,6 @@
     --gl-success: #27ae60;
     --gl-success-tint: #eafaf1;
 
-    /* Геометрия и тени */
     --gl-radius-sm: 6px;
     --gl-radius-md: 10px;
     --gl-radius-lg: 14px;
@@ -38,6 +33,7 @@
     --gl-shadow-md: 0 6px 16px rgba(36, 48, 38, 0.08);
 }
 
+/* --- 2. Base & Typography --- */
 body {
     min-height: 100vh;
     display: flex;
@@ -74,13 +70,12 @@ a:hover {
     color: var(--gl-primary-hover);
 }
 
-/* ==========================================================================
-   Компоненты навигации (Navbar)
-   ========================================================================== */
+/* --- 3. Navigation --- */
 .gl-navbar {
     background-color: var(--gl-secondary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     min-height: 68px;
+    padding: 0.5rem 1rem;
 }
 
 .gl-navbar .navbar-brand {
@@ -102,19 +97,36 @@ a:hover {
     color: #ffffff !important;
 }
 
-/* ==========================================================================
-   Кнопки дизайн-системы (.gl-btn-*)
-   ========================================================================== */
+.gl-back-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gl-text-secondary);
+    margin-bottom: 1rem;
+}
+
+.gl-back-link:hover {
+    color: var(--gl-primary);
+}
+
+/* --- 4. Buttons & Badges --- */
 .gl-btn {
     font-weight: 600;
     border-radius: var(--gl-radius-sm);
-    padding: 0.45rem 1rem;
+    padding: 0.5rem 1.15rem;
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
     border: 1px solid transparent;
+    font-size: 0.925rem;
+}
+
+.gl-btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
 }
 
 .gl-btn-primary {
@@ -178,21 +190,30 @@ a:hover {
     color: #ffffff;
 }
 
-/* ==========================================================================
-   Интерактивные переключатели реакций (Лайк, Закладка, Подписка)
-   ========================================================================== */
+.gl-badge {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+    border: 1px solid var(--gl-border);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: var(--gl-radius-sm);
+}
+
+/* --- 5. Interactive Controls --- */
 .gl-toggle-btn {
     background-color: var(--gl-bg-surface);
     border: 1px solid var(--gl-border);
     color: var(--gl-text-primary);
     font-weight: 600;
     border-radius: var(--gl-radius-sm);
-    padding: 0.45rem 1rem;
+    padding: 0.45rem 0.95rem;
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     cursor: pointer;
+    font-size: 0.875rem;
 }
 
 .gl-toggle-btn:hover {
@@ -200,62 +221,72 @@ a:hover {
     color: var(--gl-text-primary);
 }
 
-/* Состояние: Лайкнуто */
 .gl-toggle-btn.active-like {
     background-color: var(--gl-danger-tint) !important;
     border-color: var(--gl-danger) !important;
     color: var(--gl-danger) !important;
 }
 
-/* Состояние: В закладках */
 .gl-toggle-btn.active-save {
     background-color: var(--gl-primary-tint) !important;
     border-color: var(--gl-primary) !important;
     color: var(--gl-primary) !important;
 }
 
-/* Состояние: Подписан */
 .gl-toggle-btn.active-sub {
     background-color: var(--gl-secondary) !important;
     border-color: var(--gl-secondary) !important;
     color: #ffffff !important;
 }
 
-/* ==========================================================================
-   Интерактивные чипсы-фильтры по ингредиентам (.gl-filter-chip)
-   ========================================================================== */
-.gl-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  border: 1px solid var(--gl-border);
-  background-color: var(--gl-bg-surface);
-  color: var(--gl-text-secondary);
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.15s ease;
+/* --- 6. Ingredient Filter Tags & Quick Pills --- */
+.gl-quick-tag {
+    border: 1px solid var(--gl-border);
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
 }
 
-.gl-filter-chip:hover {
-  background-color: var(--gl-bg-subtle);
-  border-color: var(--gl-border-focus);
-  color: var(--gl-text-primary);
+.gl-quick-tag:hover {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border-focus);
+    color: var(--gl-text-primary);
 }
 
-.gl-filter-chip.active {
-  background-color: var(--gl-primary) !important;
-  border-color: var(--gl-primary) !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(184, 73, 36, 0.25);
+.gl-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--gl-primary-tint);
+    border: 1px solid var(--gl-primary);
+    color: var(--gl-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
 }
 
-/* ==========================================================================
-   Карточки, бейджи и формы
-   ========================================================================== */
+.gl-filter-tag-remove {
+    background: transparent;
+    border: none;
+    color: var(--gl-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.gl-filter-tag-remove:hover {
+    color: var(--gl-danger);
+}
+
+/* --- 7. Cards & Layout Elements --- */
 .gl-card {
     background-color: var(--gl-bg-surface);
     border: 1px solid var(--gl-border);
@@ -277,56 +308,6 @@ a:hover {
     border-top-right-radius: calc(var(--gl-radius-md) - 1px);
 }
 
-.gl-badge {
-    background-color: var(--gl-bg-subtle);
-    color: var(--gl-text-secondary);
-    border: 1px solid var(--gl-border);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: var(--gl-radius-sm);
-}
-
-.form-control,
-.form-select {
-    border: 1px solid var(--gl-border);
-    border-radius: var(--gl-radius-sm);
-    color: var(--gl-text-primary);
-    background-color: var(--gl-bg-surface);
-    padding: 0.55rem 0.85rem;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--gl-primary);
-    box-shadow: 0 0 0 0.2rem rgba(184, 73, 36, 0.18);
-    outline: none;
-}
-
-/* Табы личного кабинета */
-.nav-pills .nav-link {
-    color: var(--gl-text-secondary);
-    background-color: var(--gl-bg-surface);
-    border: 1px solid var(--gl-border);
-    font-weight: 600;
-    padding: 0.55rem 1.2rem;
-    border-radius: 30px;
-    transition: all 0.15s ease;
-}
-
-.nav-pills .nav-link:hover {
-    background-color: var(--gl-bg-subtle);
-    color: var(--gl-text-primary);
-}
-
-.nav-pills .nav-link.active {
-    background-color: var(--gl-primary) !important;
-    border-color: var(--gl-primary) !important;
-    color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(184, 73, 36, 0.25);
-}
-
-/* Авторская плашка действий */
 .gl-author-bar {
     background-color: var(--gl-primary-tint);
     border: 1px solid rgba(184, 73, 36, 0.25);
@@ -334,7 +315,6 @@ a:hover {
     padding: 0.85rem 1.25rem;
 }
 
-/* Калькулятор порций */
 .gl-portion-box {
     background-color: var(--gl-bg-subtle);
     border: 1px solid var(--gl-border);
@@ -363,12 +343,16 @@ a:hover {
 }
 
 .gl-ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
     cursor: pointer;
     user-select: none;
-    background-color: var(--gl-bg-surface);
-    border: 1px solid var(--gl-border) !important;
-    border-radius: var(--gl-radius-sm) !important;
-    margin-bottom: 6px;
     transition: all 0.15s ease;
 }
 
@@ -396,7 +380,29 @@ a:hover {
     flex-shrink: 0;
 }
 
-/* Компонент загрузки медиа */
+/* --- 8. Forms & Media Upload --- */
+.form-control,
+.form-select {
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
+    color: var(--gl-text-primary);
+    background-color: var(--gl-bg-surface);
+    padding: 0.55rem 0.85rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--gl-primary);
+    box-shadow: 0 0 0 0.2rem rgba(184, 73, 36, 0.18);
+    outline: none;
+}
+
+.form-control[readonly] {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+    cursor: not-allowed;
+}
+
 .gl-upload-zone {
     border: 2px dashed var(--gl-border);
     border-radius: var(--gl-radius-md);
@@ -429,7 +435,13 @@ a:hover {
     border: 3px solid var(--gl-primary);
 }
 
-/* Пустые состояния (Empty states) */
+.gl-danger-box {
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background-color: var(--gl-danger-tint);
+    border-radius: var(--gl-radius-md);
+    padding: 1.5rem;
+}
+
 .gl-empty-state {
     text-align: center;
     padding: 3rem 1.5rem;
@@ -438,14 +450,28 @@ a:hover {
     border-radius: var(--gl-radius-md);
 }
 
-/* Опасная зона (Danger Zone) */
-.gl-danger-zone {
-    border: 1px solid rgba(192, 57, 43, 0.35);
-    background-color: var(--gl-danger-tint);
-    border-radius: var(--gl-radius-md);
-    padding: 1.5rem;
+/* --- 9. Component Overrides --- */
+.nav-pills .nav-link {
+    color: var(--gl-text-secondary);
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    font-weight: 600;
+    padding: 0.55rem 1.2rem;
+    border-radius: 30px;
+    transition: all 0.15s ease;
 }
 
+.nav-pills .nav-link:hover {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--gl-primary) !important;
+    border-color: var(--gl-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(184, 73, 36, 0.25);
+}
 
 .modal-header.bg-danger,
 .modal-header.bg-danger .modal-title,
@@ -455,7 +481,6 @@ a:hover {
     color: #ffffff !important;
 }
 
-/* Стилизация инлайн-редактирования отзывов */
 .inline-edit-box {
     background-color: var(--gl-bg-subtle);
     border: 1px solid var(--gl-border);
@@ -463,11 +488,6 @@ a:hover {
     padding: 0.6rem;
 }
 
-.inline-edit-box textarea {
-    resize: vertical;
-}
-
-/* Пагинация */
 .pagination .page-link {
     color: var(--gl-text-primary);
     border-color: var(--gl-border);
@@ -487,7 +507,8 @@ a:hover {
     color: #ffffff;
 }
 
-.footer-gl {
+/* --- 10. Footer --- */
+.gl-footer {
     background-color: var(--gl-secondary);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     color: #a4b0a7;

@@ -15,32 +15,67 @@
 
 <body>
 
-    <!-- Авторизованная навигация -->
+    <!-- Navigation -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
                 </a>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="recipe.html" class="gl-btn gl-btn-outline text-dark btn-sm"><i
-                            class="bi bi-arrow-left"></i>К просмотру</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                    aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav me-auto ms-lg-3 mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Рецепты</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Кулинарный блог</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown">
+                            <button class="gl-btn gl-btn-primary gl-btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-plus-lg"></i>Создать
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                                <li><a class="dropdown-item py-2" href="create-recipe.html"><i
+                                            class="bi bi-journal-plus me-2 text-danger"></i>Новый рецепт</a></li>
+                                <li><a class="dropdown-item py-2" href="create-blog-post.html"><i
+                                            class="bi bi-pencil-square me-2 text-success"></i>Новая статья</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex align-items-center ps-3 border-start border-secondary">
+                            <a href="profile.html"
+                                class="d-flex align-items-center text-decoration-none text-light me-3">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=100&auto=format&fit=crop&q=80"
+                                    class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;"
+                                    alt="Шеф-повар">
+                                <span class="small fw-semibold">Алексей С.</span>
+                            </a>
+                            <a href="login.html" class="btn btn-outline-danger btn-sm py-1 px-2"
+                                title="Выйти из аккаунта">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
     <main class="container my-5" style="max-width: 860px;">
+        <a href="recipe.html" class="gl-back-link"><i class="bi bi-arrow-left me-1"></i>Вернуться к рецепту</a>
+
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="fw-bold mb-1">Редактирование параметров рецепта</h2>
-                    <p class="text-secondary small mb-0">Скорректируйте описание, категорию, сложность и фотоматериалы
-                        блюда.</p>
+                    <p class="text-secondary small mb-0">Скорректируйте описание, состав ингредиентов, шаги и
+                        фотоматериалы блюда.</p>
                 </div>
-                <button type="button" class="gl-btn gl-btn-danger-outline btn-sm" data-bs-toggle="modal"
+                <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm" data-bs-toggle="modal"
                     data-bs-target="#deleteRecipeModal">
-                    <i class="bi bi-trash"></i>Удалить
+                    <i class="bi bi-trash"></i>Удалить рецепт
                 </button>
             </div>
 
@@ -57,7 +92,7 @@
                         rows="3">Тайский суп со свежим лемонграссом, корнем галангала, грибами шиитаке и острым бульоном на кокосовом молоке.</textarea>
                 </div>
 
-                <div class="row g-3 mb-3">
+                <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold">Сложность приготовления *</label>
                         <select name="difficulty" class="form-select" required>
@@ -67,18 +102,21 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Время приготовления (в минутах) *</label>
+                        <label class="form-label small fw-semibold">Время приготовления (минут) *</label>
                         <input type="number" name="cooking_time_minutes" class="form-control" min="1" value="35"
                             required>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label small fw-semibold">Замена фотографии обложки</label>
+                    <label class="form-label small fw-semibold">Фотография блюда</label>
                     <div class="gl-upload-zone p-3" id="editRecipeDropZone">
-                        <span class="small text-secondary d-block mb-2">Нажмите, чтобы загрузить новое фото</span>
+                        <img src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=600&auto=format&fit=crop&q=80"
+                            class="gl-preview-img mb-2 d-block mx-auto" alt="Текущее фото">
+                        <span class="small text-secondary d-block mb-2">Нажмите кнопку ниже, чтобы заменить
+                            изображение</span>
                         <input type="file" id="editRecipeFileInput" class="d-none" accept="image/*">
-                        <button type="button" class="gl-btn gl-btn-outline btn-sm"
+                        <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                             onclick="document.getElementById('editRecipeFileInput').click()">
                             <i class="bi bi-arrow-repeat"></i>Выбрать другую фотографию
                         </button>
@@ -91,6 +129,114 @@
                         value="https://www.youtube.com/watch?v=3AAdKl1UYZs">
                 </div>
 
+                <!-- Dynamic Ingredients Section -->
+                <hr class="my-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-0">Состав ингредиентов</h5>
+                        <small class="text-secondary">Добавляйте, удаляйте или изменяйте граммовки</small>
+                    </div>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="addIngredientRowBtn">
+                        <i class="bi bi-plus-lg"></i>Добавить продукт
+                    </button>
+                </div>
+                <div id="ingredientsContainer" class="mb-4">
+                    <div class="row g-2 ingredient-row mb-2">
+                        <div class="col-6"><input type="text" class="form-control form-control-sm" placeholder="Продукт"
+                                value="Бульон рыбный" required></div>
+                        <div class="col-3"><input type="number" step="0.1" min="0.1"
+                                class="form-control form-control-sm" placeholder="Кол-во" value="400" required></div>
+                        <div class="col-2">
+                            <select class="form-select form-select-sm" required>
+                                <option value="g">г</option>
+                                <option value="ml" selected>мл</option>
+                                <option value="pcs">шт</option>
+                                <option value="tbsp">ст. л.</option>
+                                <option value="tsp">ч. л.</option>
+                            </select>
+                        </div>
+                        <div class="col-1 text-center"><button type="button"
+                                class="btn btn-sm text-danger remove-row-btn" title="Удалить"><i
+                                    class="bi bi-trash"></i></button></div>
+                    </div>
+                    <div class="row g-2 ingredient-row mb-2">
+                        <div class="col-6"><input type="text" class="form-control form-control-sm" placeholder="Продукт"
+                                value="Кокосовое молоко 17%" required></div>
+                        <div class="col-3"><input type="number" step="0.1" min="0.1"
+                                class="form-control form-control-sm" placeholder="Кол-во" value="200" required></div>
+                        <div class="col-2">
+                            <select class="form-select form-select-sm" required>
+                                <option value="g">г</option>
+                                <option value="ml" selected>мл</option>
+                                <option value="pcs">шт</option>
+                                <option value="tbsp">ст. л.</option>
+                                <option value="tsp">ч. л.</option>
+                            </select>
+                        </div>
+                        <div class="col-1 text-center"><button type="button"
+                                class="btn btn-sm text-danger remove-row-btn" title="Удалить"><i
+                                    class="bi bi-trash"></i></button></div>
+                    </div>
+                    <div class="row g-2 ingredient-row mb-2">
+                        <div class="col-6"><input type="text" class="form-control form-control-sm" placeholder="Продукт"
+                                value="Тигровые креветки" required></div>
+                        <div class="col-3"><input type="number" step="0.1" min="0.1"
+                                class="form-control form-control-sm" placeholder="Кол-во" value="250" required></div>
+                        <div class="col-2">
+                            <select class="form-select form-select-sm" required>
+                                <option value="g" selected>г</option>
+                                <option value="ml">мл</option>
+                                <option value="pcs">шт</option>
+                                <option value="tbsp">ст. л.</option>
+                                <option value="tsp">ч. л.</option>
+                            </select>
+                        </div>
+                        <div class="col-1 text-center"><button type="button"
+                                class="btn btn-sm text-danger remove-row-btn" title="Удалить"><i
+                                    class="bi bi-trash"></i></button></div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Steps Section -->
+                <hr class="my-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-0">Шаги приготовления</h5>
+                        <small class="text-secondary">Отредактируйте этапы и порядок действий</small>
+                    </div>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="addStepRowBtn">
+                        <i class="bi bi-plus-lg"></i>Добавить шаг
+                    </button>
+                </div>
+                <div id="stepsContainer" class="mb-4">
+                    <div class="step-row card p-3 mb-3 bg-light border-0 rounded-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold small step-index">Шаг 1</span>
+                            <button type="button" class="btn btn-sm text-danger remove-step-btn" title="Удалить шаг"><i
+                                    class="bi bi-trash"></i></button>
+                        </div>
+                        <textarea class="form-control form-control-sm mb-2" rows="2"
+                            required>Отбейте стебли лемонграсса тыльной стороной ножа и нарежьте кусочками по 4 см. Прогрейте специи в кипящем бульоне ровно 5 минут.</textarea>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" class="form-control form-control-sm step-file-input" accept="image/*">
+                            <span class="text-muted smaller">Заменить фото шага</span>
+                        </div>
+                    </div>
+                    <div class="step-row card p-3 mb-3 bg-light border-0 rounded-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold small step-index">Шаг 2</span>
+                            <button type="button" class="btn btn-sm text-danger remove-step-btn" title="Удалить шаг"><i
+                                    class="bi bi-trash"></i></button>
+                        </div>
+                        <textarea class="form-control form-control-sm mb-2" rows="2"
+                            required>Положите пасту в горячий бульон и непрерывно перемешивайте венчиком до полного растворения на среднем огне.</textarea>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" class="form-control form-control-sm step-file-input" accept="image/*">
+                            <span class="text-muted smaller">Заменить фото шага</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="d-flex gap-2">
                     <a href="recipe.html" class="gl-btn gl-btn-outline w-50 py-2">Отмена</a>
                     <button type="submit" class="gl-btn gl-btn-primary w-50 py-2 fw-bold">Сохранить изменения</button>
@@ -99,7 +245,7 @@
         </div>
     </main>
 
-    <!-- Модальное окно подтверждения удаления -->
+    <!-- Delete Modal -->
     <div class="modal fade" id="deleteRecipeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
@@ -110,21 +256,27 @@
                         aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <p class="mb-0">Вы действительно хотите удалить этот рецепт? Это действие необратимо.</p>
+                    <p class="mb-0">Вы действительно хотите удалить этот рецепт? Это действие нельзя отменить.</p>
                 </div>
                 <div class="modal-footer bg-light border-0 py-2">
-                    <button type="button" class="gl-btn gl-btn-outline btn-sm" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
+                        data-bs-dismiss="modal">Отмена</button>
                     <a href="index.html" class="btn btn-danger btn-sm">Да, удалить</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="footer-gl py-4 mt-auto text-center small">
-        &copy; 2026 GustoLab. Университет ИТМО.
+    <!-- Footer -->
+    <footer class="gl-footer py-4 mt-auto">
+        <div class="container text-center small">
+            <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
+            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
