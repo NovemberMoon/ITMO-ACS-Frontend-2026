@@ -1,0 +1,515 @@
+/* --- 1. Design Tokens --- */
+:root {
+    --gl-primary: #b84924;
+    --gl-primary-hover: #9c3b1a;
+    --gl-primary-tint: #fbeee8;
+
+    --gl-secondary: #243026;
+    --gl-secondary-hover: #19221a;
+    --gl-secondary-tint: #e8ece9;
+
+    --gl-bg-body: #f8f6f0;
+    --gl-bg-surface: #ffffff;
+    --gl-bg-subtle: #f0ebe1;
+    --gl-bg-muted: #e4ded2;
+
+    --gl-border: #ded7c8;
+    --gl-border-focus: #b84924;
+
+    --gl-text-primary: #1c1c1a;
+    --gl-text-secondary: #56544d;
+    --gl-text-muted: #827f75;
+
+    --gl-danger: #c0392b;
+    --gl-danger-hover: #a93226;
+    --gl-danger-tint: #fdf2f2;
+    --gl-success: #27ae60;
+    --gl-success-tint: #eafaf1;
+
+    --gl-radius-sm: 6px;
+    --gl-radius-md: 10px;
+    --gl-radius-lg: 14px;
+    --gl-shadow-sm: 0 2px 6px rgba(36, 48, 38, 0.04);
+    --gl-shadow-md: 0 6px 16px rgba(36, 48, 38, 0.08);
+}
+
+/* --- 2. Base & Typography --- */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gl-bg-body);
+    color: var(--gl-text-primary);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--gl-text-primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: var(--gl-primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    color: var(--gl-primary-hover);
+}
+
+/* --- 3. Navigation --- */
+.gl-navbar {
+    background-color: var(--gl-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    min-height: 68px;
+    padding: 0.5rem 1rem;
+}
+
+.gl-navbar .navbar-brand {
+    font-weight: 700;
+    color: #fad3b2 !important;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+}
+
+.gl-navbar .nav-link {
+    color: #d1d8d3 !important;
+    font-weight: 500;
+    padding: 0.5rem 0.85rem;
+    transition: color 0.15s ease;
+}
+
+.gl-navbar .nav-link:hover,
+.gl-navbar .nav-link.active {
+    color: #ffffff !important;
+}
+
+.gl-back-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gl-text-secondary);
+    margin-bottom: 1rem;
+}
+
+.gl-back-link:hover {
+    color: var(--gl-primary);
+}
+
+/* --- 4. Buttons & Badges --- */
+.gl-btn {
+    font-weight: 600;
+    border-radius: var(--gl-radius-sm);
+    padding: 0.5rem 1.15rem;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border: 1px solid transparent;
+    font-size: 0.925rem;
+}
+
+.gl-btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.gl-btn-primary {
+    background-color: var(--gl-primary);
+    border-color: var(--gl-primary);
+    color: #ffffff;
+}
+
+.gl-btn-primary:hover,
+.gl-btn-primary:focus {
+    background-color: var(--gl-primary-hover);
+    border-color: var(--gl-primary-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(184, 73, 36, 0.25);
+}
+
+.gl-btn-secondary {
+    background-color: var(--gl-secondary);
+    border-color: var(--gl-secondary);
+    color: #ffffff;
+}
+
+.gl-btn-secondary:hover {
+    background-color: var(--gl-secondary-hover);
+    border-color: var(--gl-secondary-hover);
+    color: #ffffff;
+}
+
+.gl-btn-outline {
+    background-color: var(--gl-bg-surface);
+    border-color: var(--gl-border);
+    color: var(--gl-text-primary);
+}
+
+.gl-btn-outline:hover {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border);
+    color: var(--gl-text-primary);
+}
+
+.gl-btn-danger-outline {
+    background-color: var(--gl-bg-surface);
+    border-color: var(--gl-danger);
+    color: var(--gl-danger);
+}
+
+.gl-btn-danger-outline:hover {
+    background-color: var(--gl-danger);
+    color: #ffffff;
+}
+
+.gl-btn-danger {
+    background-color: var(--gl-danger);
+    border-color: var(--gl-danger);
+    color: #ffffff;
+}
+
+.gl-btn-danger:hover {
+    background-color: var(--gl-danger-hover);
+    border-color: var(--gl-danger-hover);
+    color: #ffffff;
+}
+
+.gl-badge {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+    border: 1px solid var(--gl-border);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: var(--gl-radius-sm);
+}
+
+/* --- 5. Interactive Controls --- */
+.gl-toggle-btn {
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    color: var(--gl-text-primary);
+    font-weight: 600;
+    border-radius: var(--gl-radius-sm);
+    padding: 0.45rem 0.95rem;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.gl-toggle-btn:hover {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+}
+
+.gl-toggle-btn.active-like {
+    background-color: var(--gl-danger-tint) !important;
+    border-color: var(--gl-danger) !important;
+    color: var(--gl-danger) !important;
+}
+
+.gl-toggle-btn.active-save {
+    background-color: var(--gl-primary-tint) !important;
+    border-color: var(--gl-primary) !important;
+    color: var(--gl-primary) !important;
+}
+
+.gl-toggle-btn.active-sub {
+    background-color: var(--gl-secondary) !important;
+    border-color: var(--gl-secondary) !important;
+    color: #ffffff !important;
+}
+
+/* --- 6. Ingredient Filter Tags & Quick Pills --- */
+.gl-quick-tag {
+    border: 1px solid var(--gl-border);
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.gl-quick-tag:hover {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border-focus);
+    color: var(--gl-text-primary);
+}
+
+.gl-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--gl-primary-tint);
+    border: 1px solid var(--gl-primary);
+    color: var(--gl-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+}
+
+.gl-filter-tag-remove {
+    background: transparent;
+    border: none;
+    color: var(--gl-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.gl-filter-tag-remove:hover {
+    color: var(--gl-danger);
+}
+
+/* --- 7. Cards & Layout Elements --- */
+.gl-card {
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-md);
+    box-shadow: var(--gl-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gl-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--gl-shadow-md);
+}
+
+.gl-card-img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-top-left-radius: calc(var(--gl-radius-md) - 1px);
+    border-top-right-radius: calc(var(--gl-radius-md) - 1px);
+}
+
+.gl-author-bar {
+    background-color: var(--gl-primary-tint);
+    border: 1px solid rgba(184, 73, 36, 0.25);
+    border-radius: var(--gl-radius-md);
+    padding: 0.85rem 1.25rem;
+}
+
+.gl-portion-box {
+    background-color: var(--gl-bg-subtle);
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
+    padding: 6px 12px;
+}
+
+.gl-portion-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--gl-radius-sm);
+    border: 1px solid var(--gl-border);
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-primary);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.gl-portion-btn:hover {
+    background-color: var(--gl-secondary);
+    color: #ffffff;
+}
+
+.gl-ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+}
+
+.gl-ingredient-item:hover {
+    background-color: var(--gl-bg-subtle);
+}
+
+.gl-ingredient-item.checked {
+    text-decoration: line-through;
+    opacity: 0.55;
+    background-color: var(--gl-bg-muted);
+}
+
+.gl-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--gl-secondary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* --- 8. Forms & Media Upload --- */
+.form-control,
+.form-select {
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
+    color: var(--gl-text-primary);
+    background-color: var(--gl-bg-surface);
+    padding: 0.55rem 0.85rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--gl-primary);
+    box-shadow: 0 0 0 0.2rem rgba(184, 73, 36, 0.18);
+    outline: none;
+}
+
+.form-control[readonly] {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+    cursor: not-allowed;
+}
+
+.gl-upload-zone {
+    border: 2px dashed var(--gl-border);
+    border-radius: var(--gl-radius-md);
+    background-color: var(--gl-bg-surface);
+    padding: 1.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gl-upload-zone:hover {
+    border-color: var(--gl-primary);
+    background-color: var(--gl-primary-tint);
+}
+
+.gl-preview-img {
+    width: 100%;
+    max-width: 320px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--gl-radius-md);
+    border: 1px solid var(--gl-border);
+}
+
+.gl-avatar-preview {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--gl-primary);
+}
+
+.gl-danger-box {
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background-color: var(--gl-danger-tint);
+    border-radius: var(--gl-radius-md);
+    padding: 1.5rem;
+}
+
+.gl-empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background-color: var(--gl-bg-surface);
+    border: 1px dashed var(--gl-border);
+    border-radius: var(--gl-radius-md);
+}
+
+/* --- 9. Component Overrides --- */
+.nav-pills .nav-link {
+    color: var(--gl-text-secondary);
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+    font-weight: 600;
+    padding: 0.55rem 1.2rem;
+    border-radius: 30px;
+    transition: all 0.15s ease;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--gl-primary) !important;
+    border-color: var(--gl-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(184, 73, 36, 0.25);
+}
+
+.modal-header.bg-danger,
+.modal-header.bg-danger .modal-title,
+.modal-header.bg-danger h5,
+.modal-header.text-white .modal-title,
+.modal-header.text-white h5 {
+    color: #ffffff !important;
+}
+
+.inline-edit-box {
+    background-color: var(--gl-bg-subtle);
+    border: 1px solid var(--gl-border);
+    border-radius: var(--gl-radius-sm);
+    padding: 0.6rem;
+}
+
+.pagination .page-link {
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border);
+    font-weight: 600;
+    padding: 0.45rem 0.85rem;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border);
+    color: var(--gl-primary);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--gl-primary);
+    border-color: var(--gl-primary);
+    color: #ffffff;
+}
+
+/* --- 10. Footer --- */
+.gl-footer {
+    background-color: var(--gl-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a4b0a7;
+}
