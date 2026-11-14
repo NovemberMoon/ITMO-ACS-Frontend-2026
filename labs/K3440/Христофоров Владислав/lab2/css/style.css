@@ -286,6 +286,13 @@ a:hover {
     color: var(--gl-danger);
 }
 
+.gl-quick-tag.active-sub {
+    background-color: var(--gl-primary);
+    border-color: var(--gl-primary);
+    color: #ffffff;
+}
+
+
 /* --- 7. Cards & Layout Elements --- */
 .gl-card {
     background-color: var(--gl-bg-surface);
