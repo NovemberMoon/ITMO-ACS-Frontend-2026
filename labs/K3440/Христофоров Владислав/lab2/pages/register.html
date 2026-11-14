@@ -15,15 +15,23 @@
 
 <body>
 
-    <!-- Navigation (Guest) -->
+    <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
                     <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
                 </a>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="login.html" class="gl-btn gl-btn-outline gl-btn-sm text-dark">Вход</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                    aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav me-auto ms-lg-3 mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Рецепты</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Кулинарный блог</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-3" id="headerAuthContainer"></div>
                 </div>
             </div>
         </nav>
@@ -36,23 +44,37 @@
                 <p class="text-secondary small mb-0">Присоединяйтесь к кулинарному сообществу GustoLab</p>
             </div>
 
-            <form action="../index.html">
+            <form id="registerForm">
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Имя пользователя *</label>
-                    <input type="text" class="form-control" placeholder="alex_chef" required>
+                    <label for="regName" class="form-label small fw-semibold">Отображаемое имя *</label>
+                    <input type="text" id="regName" name="name" class="form-control" placeholder="Иван Петров" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Электронная почта *</label>
-                    <input type="email" class="form-control" placeholder="chef@example.com" required>
+                    <label for="regUsername" class="form-label small fw-semibold">Уникальный логин *</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-secondary">@</span>
+                        <input type="text" id="regUsername" name="username" class="form-control" placeholder="ivan_chef"
+                            pattern="[a-zA-Z0-9_]{3,20}" required>
+                    </div>
+                    <div class="form-text smaller">От 3 до 20 символов: латинские буквы, цифры и знак подчёркивания.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="regEmail" class="form-label small fw-semibold">Электронная почта *</label>
+                    <input type="email" id="regEmail" name="email" class="form-control" placeholder="chef@example.com"
+                        required>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label small fw-semibold">Пароль (не менее 6 символов) *</label>
-                    <input type="password" class="form-control" placeholder="••••••••" minlength="6" required>
+                    <label for="regPassword" class="form-label small fw-semibold">Пароль (не менее 6 символов) *</label>
+                    <input type="password" id="regPassword" name="password" class="form-control" placeholder="••••••••"
+                        minlength="6" required>
                 </div>
 
-                <button type="submit" class="gl-btn gl-btn-primary w-100 py-2 fw-bold mb-3">Зарегистрироваться</button>
+                <button type="submit" id="btnRegisterSubmit"
+                    class="gl-btn gl-btn-primary w-100 py-2 fw-bold mb-3">Зарегистрироваться</button>
 
                 <div class="text-center small text-secondary">
                     Уже зарегистрированы? <a href="login.html" class="fw-semibold">Войти в аккаунт</a>
@@ -61,7 +83,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Подвал страницы -->
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
@@ -70,6 +92,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/pages/auth-page.js"></script>
 </body>
 
 </html>
