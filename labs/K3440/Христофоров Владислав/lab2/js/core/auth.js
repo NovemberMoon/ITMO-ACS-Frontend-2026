@@ -2,6 +2,7 @@
  * Модуль управления JWT-сессией и навигационной панелью
  */
 import { escapeHtml, DEFAULT_AVATAR } from "./utils.js";
+import { Theme } from "./theme.js";
 
 export const Auth = {
     TOKEN_KEY: "gustolab_auth_token",
@@ -114,8 +115,13 @@ export const Auth = {
     }
 };
 
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => Auth.syncHeaderUI());
-} else {
+function bootstrapHeaderAndTheme() {
+    Theme.init();
     Auth.syncHeaderUI();
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootstrapHeaderAndTheme);
+} else {
+    bootstrapHeaderAndTheme();
 }

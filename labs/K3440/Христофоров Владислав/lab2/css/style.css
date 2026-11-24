@@ -1,12 +1,19 @@
-/* --- 1. Design Tokens --- */
+/* --- 1. Design Tokens (Светлая тема по умолчанию и Тёмная тема) --- */
 :root {
+    color-scheme: light;
+
     --gl-primary: #b84924;
     --gl-primary-hover: #9c3b1a;
     --gl-primary-tint: #fbeee8;
+    --gl-primary-tag-text: #9c3b1a;
+    --gl-link: #b84924;
+    --gl-link-hover: #9c3b1a;
 
     --gl-secondary: #243026;
     --gl-secondary-hover: #19221a;
     --gl-secondary-tint: #e8ece9;
+    --gl-secondary-btn: #243026;
+    --gl-secondary-btn-hover: #19221a;
 
     --gl-bg-body: #f8f6f0;
     --gl-bg-surface: #ffffff;
@@ -22,6 +29,7 @@
 
     --gl-danger: #c0392b;
     --gl-danger-hover: #a93226;
+    --gl-danger-btn: #c0392b;
     --gl-danger-tint: #fdf2f2;
     --gl-success: #27ae60;
     --gl-success-tint: #eafaf1;
@@ -31,6 +39,86 @@
     --gl-radius-lg: 14px;
     --gl-shadow-sm: 0 2px 6px rgba(36, 48, 38, 0.04);
     --gl-shadow-md: 0 6px 16px rgba(36, 48, 38, 0.08);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --gl-primary: #c24b23;
+    --gl-primary-hover: #d65a30;
+    --gl-primary-tint: rgba(214, 90, 48, 0.16);
+    --gl-primary-tag-text: #f3a68b;
+    --gl-link: #f28b66;
+    --gl-link-hover: #f7ad92;
+
+    --gl-secondary: #182019;
+    --gl-secondary-hover: #111712;
+    --gl-secondary-tint: rgba(232, 236, 233, 0.12);
+    --gl-secondary-btn: #2e3f31;
+    --gl-secondary-btn-hover: #3b503f;
+
+    --gl-bg-body: #141715;
+    --gl-bg-surface: #1e2320;
+    --gl-bg-subtle: #272e2a;
+    --gl-bg-muted: #323a35;
+
+    --gl-border: #353e39;
+    --gl-border-focus: #e06338;
+
+    --gl-text-primary: #f1efe9;
+    --gl-text-secondary: #bab7ad;
+    --gl-text-muted: #a5a298;
+
+    --gl-danger: #f47c70;
+    --gl-danger-hover: #f89b91;
+    --gl-danger-btn: #c0392b;
+    --gl-danger-tint: rgba(244, 124, 112, 0.15);
+    --gl-success: #4cd480;
+    --gl-success-tint: rgba(76, 212, 128, 0.15);
+
+    --gl-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --gl-shadow-md: 0 8px 20px rgba(0, 0, 0, 0.48);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+
+        --gl-primary: #c24b23;
+        --gl-primary-hover: #d65a30;
+        --gl-primary-tint: rgba(214, 90, 48, 0.16);
+        --gl-primary-tag-text: #f3a68b;
+        --gl-link: #f28b66;
+        --gl-link-hover: #f7ad92;
+
+        --gl-secondary: #182019;
+        --gl-secondary-hover: #111712;
+        --gl-secondary-tint: rgba(232, 236, 233, 0.12);
+        --gl-secondary-btn: #2e3f31;
+        --gl-secondary-btn-hover: #3b503f;
+
+        --gl-bg-body: #141715;
+        --gl-bg-surface: #1e2320;
+        --gl-bg-subtle: #272e2a;
+        --gl-bg-muted: #323a35;
+
+        --gl-border: #353e39;
+        --gl-border-focus: #e06338;
+
+        --gl-text-primary: #f1efe9;
+        --gl-text-secondary: #bab7ad;
+        --gl-text-muted: #a5a298;
+
+        --gl-danger: #f47c70;
+        --gl-danger-hover: #f89b91;
+        --gl-danger-btn: #c0392b;
+        --gl-danger-tint: rgba(244, 124, 112, 0.15);
+        --gl-success: #4cd480;
+        --gl-success-tint: rgba(76, 212, 128, 0.15);
+
+        --gl-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+        --gl-shadow-md: 0 8px 20px rgba(0, 0, 0, 0.48);
+    }
 }
 
 /* --- 2. Base & Typography --- */
@@ -61,13 +149,13 @@ h6 {
 }
 
 a {
-    color: var(--gl-primary);
+    color: var(--gl-link);
     text-decoration: none;
     transition: color 0.15s ease;
 }
 
 a:hover {
-    color: var(--gl-primary-hover);
+    color: var(--gl-link-hover);
 }
 
 /* --- 3. Navigation --- */
@@ -107,7 +195,7 @@ a:hover {
 }
 
 .gl-back-link:hover {
-    color: var(--gl-primary);
+    color: var(--gl-link);
 }
 
 /* --- 4. Buttons & Badges --- */
@@ -144,14 +232,14 @@ a:hover {
 }
 
 .gl-btn-secondary {
-    background-color: var(--gl-secondary);
-    border-color: var(--gl-secondary);
+    background-color: var(--gl-secondary-btn);
+    border-color: var(--gl-secondary-btn);
     color: #ffffff;
 }
 
 .gl-btn-secondary:hover {
-    background-color: var(--gl-secondary-hover);
-    border-color: var(--gl-secondary-hover);
+    background-color: var(--gl-secondary-btn-hover);
+    border-color: var(--gl-secondary-btn-hover);
     color: #ffffff;
 }
 
@@ -179,8 +267,8 @@ a:hover {
 }
 
 .gl-btn-danger {
-    background-color: var(--gl-danger);
-    border-color: var(--gl-danger);
+    background-color: var(--gl-danger-btn);
+    border-color: var(--gl-danger-btn);
     color: #ffffff;
 }
 
@@ -264,7 +352,7 @@ a:hover {
     gap: 0.4rem;
     background-color: var(--gl-primary-tint);
     border: 1px solid var(--gl-primary);
-    color: var(--gl-primary-hover);
+    color: var(--gl-primary-tag-text);
     font-size: 0.8rem;
     font-weight: 600;
     padding: 0.25rem 0.65rem;
@@ -582,4 +670,163 @@ a:hover {
 .page-link:focus-visible {
     outline: 3px solid var(--gl-primary);
     outline-offset: 2px;
+}
+
+/* --- 12. Темизация (Dark Mode и кнопка переключения темы) --- */
+body,
+.card,
+.gl-navbar,
+.gl-footer,
+.form-control,
+.form-select,
+.input-group-text,
+.modal-content,
+.dropdown-menu {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.gl-theme-btn {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #f4ebe1;
+    border-radius: var(--gl-radius-sm);
+    padding: 0.35rem 0.65rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.gl-theme-btn:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.38);
+    color: #ffffff;
+}
+
+.gl-theme-btn:focus-visible {
+    outline: 3px solid #fad3b2;
+    outline-offset: 2px;
+}
+
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .card,
+[data-theme="dark"] .card-footer.bg-white,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .list-group-item {
+    background-color: var(--gl-bg-surface) !important;
+    color: var(--gl-text-primary) !important;
+    border-color: var(--gl-border) !important;
+}
+
+[data-theme="dark"] .bg-light,
+[data-theme="dark"] .modal-header.bg-light,
+[data-theme="dark"] .modal-footer.bg-light {
+    background-color: var(--gl-bg-subtle) !important;
+    color: var(--gl-text-primary) !important;
+    border-color: var(--gl-border) !important;
+}
+
+[data-theme="dark"] .text-dark {
+    color: var(--gl-text-primary) !important;
+}
+
+[data-theme="dark"] .btn-outline-danger {
+    color: var(--gl-danger) !important;
+    border-color: var(--gl-danger) !important;
+}
+
+[data-theme="dark"] .btn-outline-danger:hover {
+    background-color: var(--gl-danger-btn) !important;
+    border-color: var(--gl-danger-btn) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .badge.bg-danger {
+    background-color: var(--gl-danger-btn) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-start,
+[data-theme="dark"] .border-end {
+    border-color: var(--gl-border) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .input-group-text {
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+    color: var(--gl-text-muted);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border-focus);
+}
+
+[data-theme="dark"] .form-control[readonly] {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--gl-text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+}
+
+[data-theme="dark"] .pagination .page-link {
+    background-color: var(--gl-bg-surface);
+    border-color: var(--gl-border);
+    color: var(--gl-text-primary);
+}
+
+[data-theme="dark"] .pagination .page-link:hover {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-link);
+}
+
+[data-theme="dark"] .pagination .page-item.disabled .page-link {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border);
+    color: var(--gl-text-muted);
+}
+
+[data-theme="dark"] .modal-header:not(.bg-danger) .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+[data-theme="dark"] .gl-author-bar {
+    background-color: var(--gl-primary-tint);
+    border-color: rgba(214, 90, 48, 0.38);
+}
+
+[data-theme="dark"] .gl-toggle-btn.active-sub {
+    background-color: var(--gl-secondary-btn) !important;
+    border-color: var(--gl-secondary-btn) !important;
+}
+
+[data-theme="dark"] .breadcrumb-item+.breadcrumb-item::before {
+    color: var(--gl-text-muted);
 }
