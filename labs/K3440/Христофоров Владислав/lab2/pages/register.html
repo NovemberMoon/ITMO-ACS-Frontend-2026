@@ -70,10 +70,10 @@
                     <div class="input-group">
                         <span class="input-group-text bg-white text-secondary">@</span>
                         <input type="text" id="regUsername" name="username" class="form-control" placeholder="ivan_chef"
-                            pattern="[a-zA-Z0-9_]{3,20}" required>
+                            pattern="[a-zA-Z0-9_]{3,20}" aria-describedby="regUsernameHelp" required>
                     </div>
-                    <div class="form-text smaller">От 3 до 20 символов: латинские буквы, цифры и знак подчёркивания.
-                    </div>
+                    <div id="regUsernameHelp" class="form-text smaller">От 3 до 20 символов: латинские буквы, цифры и
+                        знак подчёркивания.</div>
                 </div>
 
                 <div class="mb-3">
@@ -83,9 +83,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="regPassword" class="form-label small fw-semibold">Пароль (не менее 6 символов) *</label>
+                    <label for="regPassword" class="form-label small fw-semibold">Пароль *</label>
                     <input type="password" id="regPassword" name="password" class="form-control" placeholder="••••••••"
-                        minlength="6" required>
+                        minlength="6" aria-describedby="regPasswordHelp" required>
+                    <div id="regPasswordHelp" class="form-text smaller">Минимум 6 символов: используйте буквы и цифры.
+                    </div>
                 </div>
 
                 <button type="submit" id="btnRegisterSubmit"
