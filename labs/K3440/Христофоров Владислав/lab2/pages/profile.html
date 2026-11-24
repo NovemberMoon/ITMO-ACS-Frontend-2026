@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,7 +38,7 @@
         </nav>
     </header>
 
-    <main class="container my-5">
+    <main id="mainContent" tabindex="-1" class="container my-5">
         <!-- Шапка профиля пользователя -->
         <div class="card shadow-sm border-0 rounded-4 mb-4 p-4 bg-white" id="myProfileCard">
             <div class="d-flex flex-column flex-md-row align-items-center gap-4">
@@ -45,7 +46,7 @@
                 <div class="text-center text-md-start flex-grow-1">
                     <div
                         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
-                        <h3 class="fw-bold mb-0" id="myUsernameText">Загрузка...</h3>
+                        <h1 class="h3 fw-bold mb-0" id="myUsernameText">Загрузка...</h1>
                         <span class="text-muted small" id="myHandleText"></span>
                         <span class="badge bg-light text-secondary border ms-1" id="mySpecialtyText"></span>
                     </div>
@@ -62,92 +63,93 @@
                 <div>
                     <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" data-bs-toggle="modal"
                         data-bs-target="#editProfileModal">
-                        <i class="bi bi-pencil-square"></i>Редактировать профиль
+                        <i class="bi bi-pencil-square" aria-hidden="true"></i>Редактировать профиль
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- Навигация по вкладкам профиля -->
-        <ul class="nav nav-pills mb-4 gap-2" id="profileTabs">
-            <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabMyRecipes" type="button">Мои
-                    рецепты</button>
+        <ul class="nav nav-pills mb-4 gap-2" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="btnTabMyRecipes" data-bs-toggle="tab" data-bs-target="#tabMyRecipes"
+                    type="button" role="tab" aria-controls="tabMyRecipes" aria-selected="true">Мои рецепты</button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSavedRecipes"
-                    type="button">Закладки</button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btnTabSavedRecipes" data-bs-toggle="tab" data-bs-target="#tabSavedRecipes"
+                    type="button" role="tab" aria-controls="tabSavedRecipes" aria-selected="false">Закладки</button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabMyBlogs" type="button">Мои
-                    статьи</button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btnTabMyBlogs" data-bs-toggle="tab" data-bs-target="#tabMyBlogs"
+                    type="button" role="tab" aria-controls="tabMyBlogs" aria-selected="false">Мои статьи</button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscriptions"
-                    type="button">Подписки</button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btnTabSubscriptions" data-bs-toggle="tab"
+                    data-bs-target="#tabSubscriptions" type="button" role="tab" aria-controls="tabSubscriptions"
+                    aria-selected="false">Подписки</button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSubscribers"
-                    type="button">Подписчики</button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btnTabSubscribers" data-bs-toggle="tab" data-bs-target="#tabSubscribers"
+                    type="button" role="tab" aria-controls="tabSubscribers" aria-selected="false">Подписчики</button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabSecurity"
-                    type="button">Настройки</button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btnTabSecurity" data-bs-toggle="tab" data-bs-target="#tabSecurity"
+                    type="button" role="tab" aria-controls="tabSecurity" aria-selected="false">Настройки</button>
             </li>
         </ul>
 
         <!-- Содержимое вкладок -->
         <div class="tab-content" id="profileTabsContent">
             <!-- Вкладка 1: Мои рецепты -->
-            <div class="tab-pane fade show active" id="tabMyRecipes">
+            <div class="tab-pane fade show active" id="tabMyRecipes" role="tabpanel" aria-labelledby="btnTabMyRecipes">
                 <div class="row row-cols-1 row-cols-md-2 g-4" id="tabMyRecipesList">
                     <div class="col-12 text-secondary small">Загрузка ваших рецептов...</div>
                 </div>
             </div>
 
             <!-- Вкладка 2: Закладки -->
-            <div class="tab-pane fade" id="tabSavedRecipes">
+            <div class="tab-pane fade" id="tabSavedRecipes" role="tabpanel" aria-labelledby="btnTabSavedRecipes">
                 <div class="row row-cols-1 row-cols-md-2 g-4" id="tabSavedRecipesList">
                     <div class="col-12 text-secondary small">Загрузка сохранённых рецептов...</div>
                 </div>
             </div>
 
             <!-- Вкладка 3: Мои статьи -->
-            <div class="tab-pane fade" id="tabMyBlogs">
+            <div class="tab-pane fade" id="tabMyBlogs" role="tabpanel" aria-labelledby="btnTabMyBlogs">
                 <div class="row row-cols-1 row-cols-md-2 g-4" id="tabMyBlogsList">
                     <div class="col-12 text-secondary small">Загрузка ваших публикаций...</div>
                 </div>
             </div>
 
             <!-- Вкладка 4: Подписки -->
-            <div class="tab-pane fade" id="tabSubscriptions">
+            <div class="tab-pane fade" id="tabSubscriptions" role="tabpanel" aria-labelledby="btnTabSubscriptions">
                 <div id="tabSubscriptionsList">
                     <p class="text-secondary small">Загрузка подписок...</p>
                 </div>
             </div>
 
             <!-- Вкладка 5: Подписчики -->
-            <div class="tab-pane fade" id="tabSubscribers">
+            <div class="tab-pane fade" id="tabSubscribers" role="tabpanel" aria-labelledby="btnTabSubscribers">
                 <div id="tabSubscribersList">
                     <p class="text-secondary small">Загрузка подписчиков...</p>
                 </div>
             </div>
 
             <!-- Вкладка 6: Настройки аккаунта -->
-            <div class="tab-pane fade" id="tabSecurity">
+            <div class="tab-pane fade" id="tabSecurity" role="tabpanel" aria-labelledby="btnTabSecurity">
                 <div class="card border-0 shadow-sm p-4 bg-white rounded-4 mb-4">
-                    <h5 class="fw-bold mb-3">Настройки аккаунта</h5>
+                    <h2 class="h5 fw-bold mb-3">Настройки аккаунта</h2>
                     <p class="text-secondary small mb-4">Управление учётной записью шеф-повара и безопасностью.</p>
 
                     <div class="gl-danger-box">
-                        <h6 class="fw-bold text-danger mb-2"><i class="bi bi-shield-exclamation me-2"></i>Удаление
-                            профиля</h6>
+                        <h3 class="h6 fw-bold text-danger mb-2"><i class="bi bi-shield-exclamation me-2"
+                                aria-hidden="true"></i>Удаление профиля</h3>
                         <p class="text-secondary small mb-3">
                             При удалении профиля ваша учётная запись и сессия будут безвозвратно удалены из системы.
                         </p>
                         <button type="button" class="gl-btn gl-btn-danger gl-btn-sm" data-bs-toggle="modal"
                             data-bs-target="#deleteAccountModal">
-                            <i class="bi bi-trash"></i>Удалить профиль
+                            <i class="bi bi-trash" aria-hidden="true"></i>Удалить профиль
                         </button>
                     </div>
                 </div>
@@ -160,7 +162,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold">Редактирование профиля</h5>
+                    <h2 class="modal-title h5 fw-bold">Редактирование профиля</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <form id="editProfileForm">
@@ -171,36 +173,39 @@
                             <div>
                                 <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                                     onclick="document.getElementById('editAvatarFileInput').click()">
-                                    <i class="bi bi-camera"></i>Сменить фото профиля
+                                    <i class="bi bi-camera" aria-hidden="true"></i>Сменить фото профиля
                                 </button>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold">Отображаемое имя *</label>
+                            <label for="editNameInput" class="form-label small fw-semibold">Отображаемое имя *</label>
                             <input type="text" id="editNameInput" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold">Кулинарная специализация</label>
+                            <label for="editSpecialtyInput" class="form-label small fw-semibold">Кулинарная
+                                специализация</label>
                             <input type="text" id="editSpecialtyInput" class="form-control">
                         </div>
 
                         <div class="row g-2 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Логин</label>
+                                <label for="editReadonlyUsername" class="form-label small fw-semibold">Логин</label>
                                 <input type="text" id="editReadonlyUsername" class="form-control" readonly>
                                 <span class="text-muted smaller">Не подлежит смене</span>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Электронная почта</label>
+                                <label for="editReadonlyEmail" class="form-label small fw-semibold">Электронная
+                                    почта</label>
                                 <input type="email" id="editReadonlyEmail" class="form-control" readonly>
                                 <span class="text-muted smaller">Привязан к аккаунту</span>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold">Краткая информация о себе (bio)</label>
+                            <label for="editBioInput" class="form-label small fw-semibold">Краткая информация о себе
+                                (bio)</label>
                             <textarea name="bio" id="editBioInput" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
@@ -219,8 +224,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i
-                            class="bi bi-exclamation-triangle-fill me-2"></i>Удаление профиля</h5>
+                    <h2 class="modal-title h5 fw-bold text-white"><i class="bi bi-exclamation-triangle-fill me-2"
+                            aria-hidden="true"></i>Удаление профиля</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -242,7 +247,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

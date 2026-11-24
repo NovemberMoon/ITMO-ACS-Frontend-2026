@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,23 +38,24 @@
         </nav>
     </header>
 
-    <main class="container my-5" style="max-width: 820px;">
-        <a href="blog.html" id="backToBlogPostLink" class="gl-back-link"><i class="bi bi-arrow-left me-1"></i>Вернуться
+    <main id="mainContent" tabindex="-1" class="container my-5" style="max-width: 820px;">
+        <a href="blog.html" id="backToBlogPostLink" class="gl-back-link"><i class="bi bi-arrow-left me-1"
+                aria-hidden="true"></i>Вернуться
             к статье</a>
 
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
-            <h2 class="fw-bold mb-1">Редактирование публикации</h2>
+            <h1 class="h2 fw-bold mb-1">Редактирование публикации</h1>
             <p class="text-secondary small mb-4">Внесите правки в заголовок, обложку или текст кулинарной статьи.</p>
 
             <form id="editBlogForm">
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Заголовок статьи *</label>
-                    <input type="text" name="title" class="form-control" required>
+                    <label for="blogTitle" class="form-label small fw-semibold">Заголовок статьи *</label>
+                    <input type="text" id="blogTitle" name="title" class="form-control" required>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label small fw-semibold">Текст статьи *</label>
-                    <textarea name="content" class="form-control" rows="8" required></textarea>
+                    <label for="blogContent" class="form-label small fw-semibold">Текст статьи *</label>
+                    <textarea name="content" id="blogContent" class="form-control" rows="8" required></textarea>
                 </div>
 
                 <!-- Замена или удаление обложки статьи -->
@@ -65,15 +67,16 @@
                                 <img id="coverPreviewImg" class="gl-preview-img" alt="Обложка">
                                 <button type="button"
                                     class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle"
-                                    id="removeCoverBtn" style="width: 28px; height: 28px; padding: 0;">
-                                    <i class="bi bi-x"></i>
+                                    id="removeCoverBtn" style="width: 28px; height: 28px; padding: 0;"
+                                    aria-label="Удалить обложку публикации">
+                                    <i class="bi bi-x" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
                         <input type="file" id="coverFileInput" class="d-none" accept="image/*">
                         <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                             onclick="document.getElementById('coverFileInput').click()">
-                            <i class="bi bi-camera"></i>Выбрать обложку
+                            <i class="bi bi-camera" aria-hidden="true"></i>Выбрать обложку
                         </button>
                     </div>
                 </div>
@@ -90,7 +93,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

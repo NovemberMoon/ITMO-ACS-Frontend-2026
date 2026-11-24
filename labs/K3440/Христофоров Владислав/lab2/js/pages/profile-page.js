@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return `<img src="${imageUrl}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(title)}">`;
         }
         return `<div class="rounded-3 bg-light border d-flex align-items-center justify-content-center text-secondary flex-shrink-0" style="width: 88px; height: 88px;">
-              <i class="bi bi-journal-richtext fs-3 opacity-50"></i>
+                <i class="bi bi-journal-richtext fs-3 opacity-50" aria-hidden="true"></i>
             </div>`;
     }
 
@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const syncBtn = () => {
                         const isSub = Boolean(activeSubId);
                         subBtn.classList.toggle("active-sub", isSub);
+                        subBtn.setAttribute("aria-pressed", String(isSub));
                         subBtn.querySelector("span").textContent = isSub ? "Вы подписаны" : "Подписаться на автора";
                     };
                     syncBtn();
@@ -100,16 +101,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 recipesList.innerHTML = recipes.length === 0
                     ? `<p class="text-secondary small">Автор пока не опубликовал рецептов.</p>`
                     : recipes.map((r) => `
-            <div class="card border-0 shadow-sm rounded-4 p-3 mb-3 bg-white d-flex flex-row gap-3 align-items-center">
-              <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
-              <div class="flex-grow-1">
-                <span class="gl-badge mb-1 d-inline-block">${LABELS.category[r.category] || r.category}</span>
-                <h5 class="fw-bold fs-6 mb-1"><a href="recipe.html?id=${r.id}" class="text-dark">${escapeHtml(r.title)}</a></h5>
-                <small class="text-secondary d-block mb-2">${r.cooking_time_minutes} мин &bull; Сложность: ${LABELS.difficulty[r.difficulty] || r.difficulty}</small>
-                <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Смотреть рецепт</a>
-              </div>
-            </div>
-          `).join("");
+                        <div class="card border-0 shadow-sm rounded-4 p-3 mb-3 bg-white d-flex flex-row gap-3 align-items-center">
+                        <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
+                        <div class="flex-grow-1">
+                            <span class="gl-badge mb-1 d-inline-block">${LABELS.category[r.category] || r.category}</span>
+                            <h3 class="fw-bold fs-6 mb-1"><a href="recipe.html?id=${r.id}" class="text-dark">${escapeHtml(r.title)}</a></h3>
+                            <small class="text-secondary d-block mb-2">${r.cooking_time_minutes} мин &bull; Сложность: ${LABELS.difficulty[r.difficulty] || r.difficulty}</small>
+                            <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Смотреть рецепт</a>
+                        </div>
+                        </div>
+                    `).join("");
             }
 
             const blogsList = document.getElementById("authorBlogsList");
@@ -119,15 +120,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                     : blogs.map((b) => {
                         const likesCount = (blogLikes || []).filter((l) => Number(l.targetId) === Number(b.id)).length;
                         return `
-              <div class="card border-0 shadow-sm rounded-4 p-3 mb-3 bg-white d-flex flex-row gap-3 align-items-center">
-                ${renderBlogThumb(b.image_url, b.title)}
-                <div class="flex-grow-1">
-                  <h5 class="fw-bold fs-6 mb-1"><a href="blog-post.html?id=${b.id}" class="text-dark">${escapeHtml(b.title)}</a></h5>
-                  <small class="text-secondary d-block mb-2">Опубликовано ${formatDateRu(b.created_at)} &bull; ${likesCount} отметок</small>
-                  <a href="blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm">Читать статью</a>
-                </div>
-              </div>
-            `;
+                            <div class="card border-0 shadow-sm rounded-4 p-3 mb-3 bg-white d-flex flex-row gap-3 align-items-center">
+                                ${renderBlogThumb(b.image_url, b.title)}
+                                <div class="flex-grow-1">
+                                <h3 class="fw-bold fs-6 mb-1"><a href="blog-post.html?id=${b.id}" class="text-dark">${escapeHtml(b.title)}</a></h3>
+                                <small class="text-secondary d-block mb-2">Опубликовано ${formatDateRu(b.created_at)} &bull; ${likesCount} отметок</small>
+                                <a href="blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm">Читать статью</a>
+                                </div>
+                            </div>
+                            `;
                     }).join("");
             }
         } catch {
@@ -178,20 +179,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                 myRecipesContainer.innerHTML = myRecipes.length === 0
                     ? `<div class="col-12"><p class="text-secondary small">Вы ещё не опубликовали ни одного рецепта.</p></div>`
                     : myRecipes.map((r) => `
-            <div class="col">
-              <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
-                <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
-                <div class="flex-grow-1">
-                  <h6 class="fw-bold mb-1">${escapeHtml(r.title)}</h6>
-                  <p class="text-secondary small mb-2">${r.cooking_time_minutes} мин &bull; ${LABELS.difficulty[r.difficulty] || r.difficulty}</p>
-                  <div class="d-flex gap-2">
-                    <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Просмотр</a>
-                    <a href="edit-recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm"><i class="bi bi-pencil"></i>Изменить</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `).join("");
+                        <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
+                            <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
+                            <div class="flex-grow-1">
+                            <h2 class="h6 fw-bold mb-1">${escapeHtml(r.title)}</h2>
+                            <p class="text-secondary small mb-2">${r.cooking_time_minutes} мин &bull; ${LABELS.difficulty[r.difficulty] || r.difficulty}</p>
+                            <div class="d-flex gap-2">
+                                <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Просмотр</a>
+                                <a href="edit-recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm"><i class="bi bi-pencil" aria-hidden="true"></i>Изменить</a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    `).join("");
             }
 
             // Закладки
@@ -211,22 +212,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                         : validSaved.map((r) => {
                             const author = usersMap.get(Number(r.userId));
                             return `
-                <div class="col saved-bookmark-col" data-recipe-id="${r.id}">
-                  <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
-                    <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
-                    <div class="flex-grow-1">
-                      <h6 class="fw-bold mb-1">${escapeHtml(r.title)}</h6>
-                      <p class="text-secondary small mb-2">Автор: ${escapeHtml(author ? author.name : "Шеф GustoLab")}</p>
-                      <div class="d-flex gap-2">
-                        <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Открыть</a>
-                        <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm btn-remove-bookmark" data-recipe-id="${r.id}">
-                          <i class="bi bi-bookmark-x"></i>Убрать
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;
+                                <div class="col saved-bookmark-col" data-recipe-id="${r.id}">
+                                <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
+                                    <img src="${r.image_url}" class="rounded-3 flex-shrink-0" style="width: 88px; height: 88px; object-fit: cover;" alt="${escapeHtml(r.title)}">
+                                    <div class="flex-grow-1">
+                                    <h2 class="h6 fw-bold mb-1">${escapeHtml(r.title)}</h2>
+                                    <p class="text-secondary small mb-2">Автор: ${escapeHtml(author ? author.name : "Шеф GustoLab")}</p>
+                                    <div class="d-flex gap-2">
+                                        <a href="recipe.html?id=${r.id}" class="gl-btn gl-btn-outline gl-btn-sm">Открыть</a>
+                                        <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm btn-remove-bookmark" data-recipe-id="${r.id}" aria-pressed="true">
+                                        <i class="bi bi-bookmark-x" aria-hidden="true"></i>Убрать
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            `;
                         }).join("");
 
                     savedContainer.addEventListener("click", async (e) => {
@@ -238,6 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             await API.patch(`/users/${user.id}`, { bookmarked_recipe_ids: nextIds });
                             user.bookmarked_recipe_ids = nextIds;
                             Auth.updateStoredUser({ bookmarked_recipe_ids: nextIds });
+                            btn.setAttribute("aria-pressed", "false");
                             btn.closest(".saved-bookmark-col")?.remove();
                             const remainingCols = savedContainer.querySelectorAll(".saved-bookmark-col").length;
                             document.getElementById("statBookmarksCount").textContent = remainingCols;
@@ -257,20 +259,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                     : myBlogs.map((b) => {
                         const likesCount = (blogLikes || []).filter((l) => Number(l.targetId) === Number(b.id)).length;
                         return `
-              <div class="col">
-                <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
-                  ${renderBlogThumb(b.image_url, b.title)}
-                  <div class="flex-grow-1">
-                    <h6 class="fw-bold mb-1">${escapeHtml(b.title)}</h6>
-                    <p class="text-secondary small mb-2">${formatDateRu(b.created_at)} &bull; ${likesCount} отметок</p>
-                    <div class="d-flex gap-2">
-                      <a href="blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm">Читать</a>
-                      <a href="edit-blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm"><i class="bi bi-pencil"></i>Изменить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
+                            <div class="col">
+                                <div class="card h-100 shadow-sm border-0 rounded-4 d-flex flex-row p-3 align-items-center gap-3 bg-white">
+                                ${renderBlogThumb(b.image_url, b.title)}
+                                <div class="flex-grow-1">
+                                    <h2 class="h6 fw-bold mb-1">${escapeHtml(b.title)}</h2>
+                                    <p class="text-secondary small mb-2">${formatDateRu(b.created_at)} &bull; ${likesCount} отметок</p>
+                                    <div class="d-flex gap-2">
+                                    <a href="blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm">Читать</a>
+                                    <a href="edit-blog-post.html?id=${b.id}" class="gl-btn gl-btn-outline gl-btn-sm"><i class="bi bi-pencil" aria-hidden="true"></i>Изменить</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            `;
                     }).join("");
             }
 
@@ -283,21 +285,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                         const target = usersMap.get(Number(sub.following_id));
                         if (!target) return "";
                         return `
-              <div class="card border-0 shadow-sm p-3 bg-white rounded-4 mb-2 sub-row">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center gap-3">
-                    <img src="${target.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 44px; height: 44px; object-fit: cover;" alt="${escapeHtml(target.name)}">
-                    <div>
-                      <h6 class="mb-0 fw-bold"><a href="author.html?id=${target.id}" class="text-dark">${escapeHtml(target.name)}</a></h6>
-                      <small class="text-secondary">${escapeHtml(target.specialty || "Кулинар")}</small>
-                    </div>
-                  </div>
-                  <button type="button" class="gl-toggle-btn active-sub btn-unsub-profile" data-sub-id="${sub.id}">
-                    <span>Отписаться</span>
-                  </button>
-                </div>
-              </div>
-            `;
+                            <div class="card border-0 shadow-sm p-3 bg-white rounded-4 mb-2 sub-row">
+                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="${target.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 44px; height: 44px; object-fit: cover;" alt="">
+                                    <div>
+                                    <h2 class="h6 mb-0 fw-bold"><a href="author.html?id=${target.id}" class="text-dark">${escapeHtml(target.name)}</a></h2>
+                                    <small class="text-secondary">${escapeHtml(target.specialty || "Кулинар")}</small>
+                                    </div>
+                                </div>
+                                <button type="button" class="gl-toggle-btn active-sub btn-unsub-profile" data-sub-id="${sub.id}" aria-pressed="true">
+                                    <span>Отписаться</span>
+                                </button>
+                                </div>
+                            </div>
+                            `;
                     }).join("");
 
                 subsContainer.addEventListener("click", async (e) => {
@@ -305,6 +307,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (!btn) return;
                     try {
                         await API.delete(`/subscriptions/${btn.dataset.subId}`);
+                        btn.setAttribute("aria-pressed", "false");
                         btn.closest(".sub-row")?.remove();
                         const countEl = document.getElementById("statSubscriptionsCount");
                         countEl.textContent = Math.max(0, parseInt(countEl.textContent, 10) - 1);
@@ -325,21 +328,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                         if (!follower) return "";
                         const alreadyFollowingBack = mySubscriptions.some((s) => Number(s.following_id) === Number(follower.id));
                         return `
-              <div class="card border-0 shadow-sm p-3 bg-white rounded-4 mb-2">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center gap-3">
-                    <img src="${follower.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 44px; height: 44px; object-fit: cover;" alt="${escapeHtml(follower.name)}">
-                    <div>
-                      <h6 class="mb-0 fw-bold"><a href="author.html?id=${follower.id}" class="text-dark">${escapeHtml(follower.name)}</a></h6>
-                      <small class="text-secondary">${escapeHtml(follower.specialty || "Кулинар")}</small>
-                    </div>
-                  </div>
-                  <a href="author.html?id=${follower.id}" class="gl-btn gl-btn-outline gl-btn-sm">
-                    ${alreadyFollowingBack ? "Взаимная подписка" : "Профиль"}
-                  </a>
-                </div>
-              </div>
-            `;
+                            <div class="card border-0 shadow-sm p-3 bg-white rounded-4 mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="${follower.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 44px; height: 44px; object-fit: cover;" alt="">
+                                    <div>
+                                    <h2 class="h6 mb-0 fw-bold"><a href="author.html?id=${follower.id}" class="text-dark">${escapeHtml(follower.name)}</a></h2>
+                                    <small class="text-secondary">${escapeHtml(follower.specialty || "Кулинар")}</small>
+                                    </div>
+                                </div>
+                                <a href="author.html?id=${follower.id}" class="gl-btn gl-btn-outline gl-btn-sm">
+                                    ${alreadyFollowingBack ? "Взаимная подписка" : "Профиль"}
+                                </a>
+                                </div>
+                            </div>
+                            `;
                     }).join("");
             }
 

@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,8 +38,9 @@
         </nav>
     </header>
 
-    <main class="container my-5" style="max-width: 820px;">
-        <a href="blog.html" class="gl-back-link"><i class="bi bi-arrow-left me-1"></i>Назад в блог</a>
+    <main id="mainContent" tabindex="-1" class="container my-5" style="max-width: 820px;">
+        <a href="blog.html" class="gl-back-link"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Назад в
+            блог</a>
 
         <article class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
             <h1 class="fw-bold mb-3" id="blogPostTitle">Загрузка статьи...</h1>
@@ -53,13 +55,13 @@
                             <span class="text-muted smaller" id="blogPostDate">--</span>
                         </div>
                     </a>
-                    <button type="button" class="gl-toggle-btn" id="blogAuthorSubBtn">
-                        <i class="bi bi-person-plus"></i><span>Подписаться</span>
+                    <button type="button" class="gl-toggle-btn" id="blogAuthorSubBtn" aria-pressed="false">
+                        <i class="bi bi-person-plus" aria-hidden="true"></i><span>Подписаться</span>
                     </button>
                 </div>
 
-                <button type="button" class="gl-toggle-btn" id="likeBlogBtn">
-                    <i class="bi bi-heart-fill"></i><span id="likeBlogCount">0</span>
+                <button type="button" class="gl-toggle-btn" id="likeBlogBtn" aria-pressed="false">
+                    <i class="bi bi-heart-fill" aria-hidden="true"></i><span id="likeBlogCount">0</span>
                 </button>
             </div>
 
@@ -74,15 +76,16 @@
             <!-- Авторская панель -->
             <div class="gl-author-bar d-flex justify-content-between align-items-center mt-5 d-none"
                 id="blogAuthorControlBar">
-                <span class="small fw-semibold text-dark"><i class="bi bi-check-circle-fill text-danger me-1"></i>Вы
+                <span class="small fw-semibold text-dark"><i class="bi bi-check-circle-fill text-danger me-1"
+                        aria-hidden="true"></i>Вы
                     автор этой статьи</span>
                 <div class="d-flex gap-2">
                     <a href="#" class="gl-btn gl-btn-outline gl-btn-sm bg-white" id="editBlogLink">
-                        <i class="bi bi-pencil"></i>Изменить
+                        <i class="bi bi-pencil" aria-hidden="true"></i>Изменить
                     </a>
                     <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm bg-white" data-bs-toggle="modal"
                         data-bs-target="#deleteBlogModal">
-                        <i class="bi bi-trash"></i>Удалить
+                        <i class="bi bi-trash" aria-hidden="true"></i>Удалить
                     </button>
                 </div>
             </div>
@@ -90,10 +93,11 @@
 
         <!-- Обсуждение публикации -->
         <section class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-            <h5 class="fw-bold mb-3" id="blogCommentsCountHeader"><i class="bi bi-chat-left-text me-2"></i>Обсуждение
-                статьи</h5>
+            <h2 class="h5 fw-bold mb-3" id="blogCommentsCountHeader"><i class="bi bi-chat-left-text me-2"
+                    aria-hidden="true"></i>Обсуждение статьи</h2>
 
             <form id="addBlogCommentForm" class="mb-4">
+                <label for="blogCommentInput" class="visually-hidden">Текст комментария к статье</label>
                 <textarea id="blogCommentInput" class="form-control mb-2" rows="3"
                     placeholder="Задайте вопрос автору или оставьте комментарий..." required></textarea>
                 <button type="submit" class="gl-btn gl-btn-primary gl-btn-sm">Опубликовать комментарий</button>
@@ -110,8 +114,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i
-                            class="bi bi-exclamation-triangle-fill me-2"></i>Удаление статьи</h5>
+                    <h2 class="modal-title h5 fw-bold text-white"><i class="bi bi-exclamation-triangle-fill me-2"
+                            aria-hidden="true"></i>Удаление статьи</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -132,8 +136,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i class="bi bi-trash-fill me-2"></i>Удаление комментария
-                    </h5>
+                    <h2 class="modal-title h5 fw-bold text-white"><i class="bi bi-trash-fill me-2"
+                            aria-hidden="true"></i>Удаление комментария</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -153,7 +157,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

@@ -105,6 +105,8 @@ export function showToast(message, type = "primary") {
         container.id = "glToastContainer";
         container.className = "toast-container position-fixed bottom-0 end-0 p-3";
         container.style.zIndex = "1080";
+        container.setAttribute("aria-live", "polite");
+        container.setAttribute("aria-atomic", "true");
         document.body.appendChild(container);
     }
 
@@ -113,11 +115,11 @@ export function showToast(message, type = "primary") {
     toastEl.className = `toast align-items-center ${bgClass} border-0 shadow`;
     toastEl.setAttribute("role", "alert");
     toastEl.innerHTML = `
-    <div class="d-flex">
-      <div class="toast-body small fw-medium">${escapeHtml(message)}</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
-    </div>
-  `;
+        <div class="d-flex">
+        <div class="toast-body small fw-medium">${escapeHtml(message)}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+    `;
     container.appendChild(toastEl);
 
     const bsToast = new window.bootstrap.Toast(toastEl, { delay: 3200 });

@@ -40,7 +40,7 @@ export function initCommentsSection({
         try {
             const comments = await API.get(`/comments?${targetField}=${targetId}`);
             if (headerEl) {
-                headerEl.innerHTML = `<i class="bi bi-chat-left-text me-2"></i>${headerTitlePrefix} (${comments.length})`;
+                headerEl.innerHTML = `<i class="bi bi-chat-left-text me-2" aria-hidden="true"></i>${headerTitlePrefix} (${comments.length})`;
             }
 
             if (comments.length === 0) {
@@ -59,14 +59,14 @@ export function initCommentsSection({
             <div class="card-body py-3 px-3">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <a href="author.html?id=${c.userId}" class="d-flex align-items-center text-decoration-none text-dark">
-                  <img src="${authorAvatar}" class="rounded-circle me-2" style="width: 26px; height: 26px; object-fit: cover;" alt="${escapeHtml(authorName)}">
+                  <img src="${authorAvatar}" class="rounded-circle me-2" style="width: 26px; height: 26px; object-fit: cover;" alt="">
                   <span class="fw-bold small">${escapeHtml(authorName)}</span>
                 </a>
                 <div class="d-flex align-items-center gap-2">
                   <span class="text-muted smaller">${formatDateRu(c.created_at)}</span>
                   ${isOwner ? `
-                    <button type="button" class="btn btn-sm p-0 text-secondary btn-edit-comment" title="Редактировать"><i class="bi bi-pencil"></i></button>
-                    <button type="button" class="btn btn-sm p-0 text-danger btn-delete-comment" title="Удалить"><i class="bi bi-trash"></i></button>
+                    <button type="button" class="btn btn-sm p-1 text-secondary btn-edit-comment" aria-label="Редактировать комментарий" title="Редактировать"><i class="bi bi-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-sm p-1 text-danger btn-delete-comment" aria-label="Удалить комментарий" title="Удалить"><i class="bi bi-trash" aria-hidden="true"></i></button>
                   ` : ""}
                 </div>
               </div>
@@ -123,7 +123,8 @@ export function initCommentsSection({
             const box = document.createElement("div");
             box.className = "inline-edit-box mt-2";
             box.innerHTML = `
-        <textarea class="form-control form-control-sm mb-2" rows="2">${escapeHtml(originalText)}</textarea>
+        <label for="inlineEdit ${commentId}" class="visually-hidden">Редактирование текста комментария</label>
+        <textarea id="inlineEdit ${commentId}" class="form-control form-control-sm mb-2" rows="2">${escapeHtml(originalText)}</textarea>
         <div class="d-flex gap-2 justify-content-end">
           <button type="button" class="gl-btn gl-btn-outline gl-btn-sm btn-cancel-edit">Отмена</button>
           <button type="button" class="gl-btn gl-btn-primary gl-btn-sm btn-save-edit">Сохранить</button>

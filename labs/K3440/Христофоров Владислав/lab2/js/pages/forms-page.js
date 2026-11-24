@@ -55,20 +55,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!ingrContainer) return;
         const row = document.createElement("div");
         row.className = "row g-2 ingredient-row mb-2";
+        const rowUid = `ing_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
         row.innerHTML = `
-      <div class="col-6"><input type="text" class="form-control form-control-sm ing-name" placeholder="Название продукта" value="${escapeHtml(item.name)}" required></div>
-      <div class="col-3"><input type="number" step="0.1" min="0.1" class="form-control form-control-sm ing-amount" placeholder="Количество" value="${item.amount}" required></div>
-      <div class="col-2">
-        <select class="form-select form-select-sm ing-unit" required>
-          <option value="г" ${item.unit === "г" ? "selected" : ""}>г</option>
-          <option value="мл" ${item.unit === "мл" ? "selected" : ""}>мл</option>
-          <option value="шт" ${item.unit === "шт" ? "selected" : ""}>шт</option>
-          <option value="ст. л." ${item.unit === "ст. л." ? "selected" : ""}>ст. л.</option>
-          <option value="ч. л." ${item.unit === "ч. л." ? "selected" : ""}>ч. л.</option>
-        </select>
-      </div>
-      <div class="col-1 text-center"><button type="button" class="btn btn-sm text-danger remove-row-btn" title="Удалить"><i class="bi bi-trash"></i></button></div>
-    `;
+            <div class="col-6">
+                <label for="${rowUid}_name" class="visually-hidden">Название продукта</label>
+                <input type="text" id="${rowUid}_name" class="form-control form-control-sm ing-name" placeholder="Название продукта" value="${escapeHtml(item.name)}" required>
+            </div>
+            <div class="col-3">
+                <label for="${rowUid}_amount" class="visually-hidden">Количество</label>
+                <input type="number" id="${rowUid}_amount" step="0.1" min="0.1" class="form-control form-control-sm ing-amount" placeholder="Количество" value="${item.amount}" required>
+            </div>
+            <div class="col-2">
+                <label for="${rowUid}_unit" class="visually-hidden">Единица измерения</label>
+                <select id="${rowUid}_unit" class="form-select form-select-sm ing-unit" required>
+                <option value="г" ${item.unit === "г" ? "selected" : ""}>г</option>
+                <option value="мл" ${item.unit === "мл" ? "selected" : ""}>мл</option>
+                <option value="шт" ${item.unit === "шт" ? "selected" : ""}>шт</option>
+                <option value="ст. л." ${item.unit === "ст. л." ? "selected" : ""}>ст. л.</option>
+                <option value="ч. л." ${item.unit === "ч. л." ? "selected" : ""}>ч. л.</option>
+                </select>
+            </div>
+            <div class="col-1 text-center"><button type="button" class="btn btn-sm text-danger remove-row-btn" aria-label="Удалить ингредиент" title="Удалить"><i class="bi bi-trash" aria-hidden="true"></i></button></div>
+            `;
         ingrContainer.appendChild(row);
     }
 
@@ -78,17 +86,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         const card = document.createElement("div");
         card.className = "step-row card p-3 mb-3 bg-light border-0 rounded-3";
         card.dataset.existingStepImage = stepData.image_url || "";
+        const stepUid = `step_${Date.now()}_${idx}`;
         card.innerHTML = `
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <span class="fw-bold small step-index">Шаг ${idx}</span>
-        <button type="button" class="btn btn-sm text-danger remove-step-btn" title="Удалить шаг"><i class="bi bi-trash"></i></button>
-      </div>
-      <textarea class="form-control form-control-sm mb-2 step-desc" rows="2" placeholder="Опишите процесс приготовления..." required>${escapeHtml(stepData.description)}</textarea>
-      <div class="d-flex align-items-center gap-2">
-        <input type="file" class="form-control form-control-sm step-file-input" accept="image/*">
-        <span class="text-muted smaller text-nowrap">${stepData.image_url ? "Фото прикреплено (можно заменить)" : "Фото этапа (по желанию)"}</span>
-      </div>
-    `;
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold small step-index">Шаг ${idx}</span>
+                <button type="button" class="btn btn-sm text-danger remove-step-btn" aria-label="Удалить шаг" title="Удалить шаг"><i class="bi bi-trash" aria-hidden="true"></i></button>
+            </div>
+            <label for="${stepUid}_desc" class="visually-hidden">Описание шага приготовления</label>
+            <textarea id="${stepUid}_desc" class="form-control form-control-sm mb-2 step-desc" rows="2" placeholder="Опишите процесс приготовления..." required>${escapeHtml(stepData.description)}</textarea>
+            <div class="d-flex align-items-center gap-2">
+                <label for="${stepUid}_file" class="visually-hidden">Фотография этапа</label>
+                <input type="file" id="${stepUid}_file" class="form-control form-control-sm step-file-input" accept="image/*">
+                <span class="text-muted smaller text-nowrap">${stepData.image_url ? "Фото прикреплено (можно заменить)" : "Фото этапа (по желанию)"}</span>
+            </div>
+            `;
         stepsContainer.appendChild(card);
     }
 

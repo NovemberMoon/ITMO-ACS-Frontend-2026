@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,38 +38,39 @@
         </nav>
     </header>
 
-    <main class="container my-5" style="max-width: 860px;">
+    <main id="mainContent" tabindex="-1" class="container my-5" style="max-width: 860px;">
         <a href="../index.html" id="backToRecipeLink" class="gl-back-link"><i
                 class="bi bi-arrow-left me-1"></i>Вернуться к рецепту</a>
 
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
                 <div>
-                    <h2 class="fw-bold mb-1">Редактирование параметров рецепта</h2>
+                    <h1 class="h2 fw-bold mb-1">Редактирование параметров рецепта</h1>
                     <p class="text-secondary small mb-0">Скорректируйте описание, состав ингредиентов, шаги и
                         фотоматериалы блюда.</p>
                 </div>
                 <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm" data-bs-toggle="modal"
                     data-bs-target="#deleteRecipeModal">
-                    <i class="bi bi-trash"></i>Удалить рецепт
+                    <i class="bi bi-trash" aria-hidden="true"></i>Удалить рецепт
                 </button>
             </div>
 
             <form id="editRecipeForm">
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Название блюда *</label>
-                    <input type="text" name="title" class="form-control" required>
+                    <label for="recipeTitle" class="form-label small fw-semibold">Название блюда *</label>
+                    <input type="text" id="recipeTitle" name="title" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Описание блюда *</label>
-                    <textarea name="description" class="form-control" rows="3" required></textarea>
+                    <label for="recipeDescription" class="form-label small fw-semibold">Описание блюда *</label>
+                    <textarea id="recipeDescription" name="description" class="form-control" rows="3"
+                        required></textarea>
                 </div>
 
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
-                        <label class="form-label small fw-semibold">Категория *</label>
-                        <select name="category" class="form-select" required>
+                        <label for="recipeCategory" class="form-label small fw-semibold">Категория *</label>
+                        <select id="recipeCategory" name="category" class="form-select" required>
                             <option value="soup">Супы</option>
                             <option value="main">Горячие блюда</option>
                             <option value="cold">Закуски</option>
@@ -77,20 +79,22 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-semibold">Сложность *</label>
-                        <select name="difficulty" class="form-select" required>
+                        <label for="recipeDifficulty" class="form-label small fw-semibold">Сложность *</label>
+                        <select id="recipeDifficulty" name="difficulty" class="form-select" required>
                             <option value="easy">Легко</option>
                             <option value="medium">Средне</option>
                             <option value="hard">Сложно</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-semibold">Время готовки (мин) *</label>
-                        <input type="number" name="cooking_time_minutes" class="form-control" min="1" required>
+                        <label for="recipeTime" class="form-label small fw-semibold">Время готовки (мин) *</label>
+                        <input type="number" id="recipeTime" name="cooking_time_minutes" class="form-control" min="1"
+                            required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-semibold">Базовые порции *</label>
-                        <input type="number" name="servings_base" class="form-control" min="1" max="16" required>
+                        <label for="recipeServings" class="form-label small fw-semibold">Базовые порции *</label>
+                        <input type="number" id="recipeServings" name="servings_base" class="form-control" min="1"
+                            max="16" required>
                     </div>
                 </div>
 
@@ -103,25 +107,25 @@
                         <input type="file" id="coverFileInput" class="d-none" accept="image/*">
                         <button type="button" class="gl-btn gl-btn-outline gl-btn-sm"
                             onclick="document.getElementById('coverFileInput').click()">
-                            <i class="bi bi-camera"></i>Заменить фотографию
+                            <i class="bi bi-camera" aria-hidden="true"></i>Заменить фотографию
                         </button>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label small fw-semibold">Ссылка на видеоматериал</label>
-                    <input type="url" name="video_url" class="form-control">
+                    <label for="recipeVideoUrl" class="form-label small fw-semibold">Ссылка на видеоматериал</label>
+                    <input type="url" id="recipeVideoUrl" name="video_url" class="form-control">
                 </div>
 
                 <!-- Динамические ингредиенты -->
                 <hr class="my-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 class="fw-bold mb-0">Состав ингредиентов</h5>
+                        <h2 class="h5 fw-bold mb-0">Состав ингредиентов</h2>
                         <small class="text-secondary">Добавляйте, удаляйте или изменяйте граммовки</small>
                     </div>
                     <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="addIngredientRowBtn">
-                        <i class="bi bi-plus-lg"></i>Добавить продукт
+                        <i class="bi bi-plus-lg" aria-hidden="true"></i>Добавить продукт
                     </button>
                 </div>
                 <div id="ingredientsContainer" class="mb-4"></div>
@@ -130,11 +134,11 @@
                 <hr class="my-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 class="fw-bold mb-0">Шаги приготовления</h5>
+                        <h2 class="h5 fw-bold mb-0">Шаги приготовления</h2>
                         <small class="text-secondary">Отредактируйте этапы и порядок действий</small>
                     </div>
                     <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="addStepRowBtn">
-                        <i class="bi bi-plus-lg"></i>Добавить шаг
+                        <i class="bi bi-plus-lg" aria-hidden="true"></i>Добавить шаг
                     </button>
                 </div>
                 <div id="stepsContainer" class="mb-4"></div>
@@ -152,8 +156,9 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i
-                            class="bi bi-exclamation-triangle-fill me-2"></i>Подтверждение удаления</h5>
+                    <h2 class="modal-title h5 fw-bold text-white">
+                        <i class="bi bi-exclamation-triangle-fill me-2" aria-hidden="true"></i>Подтверждение удаления
+                    </h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -173,7 +178,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

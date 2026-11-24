@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,13 +38,14 @@
         </nav>
     </header>
 
-    <main class="container my-4">
-        <nav aria-label="breadcrumb" class="mb-3">
+    <main id="mainContent" tabindex="-1" class="container my-4">
+        <nav aria-label="Хлебные крошки" class="mb-3">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="../index.html" class="text-secondary">Рецепты</a></li>
                 <li class="breadcrumb-item"><a href="../index.html" class="text-secondary"
                         id="recipeBreadcrumbCategory">Категория</a></li>
-                <li class="breadcrumb-item active text-dark" id="recipeBreadcrumbTitle">Загрузка...</li>
+                <li class="breadcrumb-item active text-dark" aria-current="page" id="recipeBreadcrumbTitle">Загрузка...
+                </li>
             </ol>
         </nav>
 
@@ -53,10 +55,10 @@
                 <div>
                     <div class="d-flex align-items-center gap-2 mb-2">
                         <span class="gl-badge" id="recipeCategoryBadge">Категория</span>
-                        <span class="small text-secondary"><i class="bi bi-clock me-1 text-danger"></i><span
-                                id="recipeTime">-- мин</span></span>
-                        <span class="small text-secondary"><i class="bi bi-speedometer2 me-1 text-danger"></i><span
-                                id="recipeDifficultyBadge">Сложность</span></span>
+                        <span class="small text-secondary"><i class="bi bi-clock me-1 text-danger"
+                                aria-hidden="true"></i><span id="recipeTime">-- мин</span></span>
+                        <span class="small text-secondary"><i class="bi bi-speedometer2 me-1 text-danger"
+                                aria-hidden="true"></i><span id="recipeDifficultyBadge">Сложность</span></span>
                     </div>
                     <h1 class="display-6 fw-bold mb-2" id="recipeTitle">Загрузка рецепта...</h1>
                     <p class="text-secondary small mb-3" id="recipeDescription"></p>
@@ -68,18 +70,18 @@
                                 style="width: 32px; height: 32px; object-fit: cover;" alt="Автор">
                             <span class="fw-semibold small" id="recipeAuthorName">Шеф-повар</span>
                         </a>
-                        <button type="button" class="gl-toggle-btn" id="recipeAuthorSubBtn">
-                            <i class="bi bi-person-plus"></i><span>Подписаться</span>
+                        <button type="button" class="gl-toggle-btn" id="recipeAuthorSubBtn" aria-pressed="false">
+                            <i class="bi bi-person-plus" aria-hidden="true"></i><span>Подписаться</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="d-flex flex-wrap align-items-center gap-2">
-                    <button type="button" class="gl-toggle-btn" id="likeRecipeBtn">
-                        <i class="bi bi-heart-fill"></i><span id="likeCount">0</span>
+                    <button type="button" class="gl-toggle-btn" id="likeRecipeBtn" aria-pressed="false">
+                        <i class="bi bi-heart-fill" aria-hidden="true"></i><span id="likeCount">0</span>
                     </button>
-                    <button type="button" class="gl-toggle-btn" id="saveRecipeBtn">
-                        <i class="bi bi-bookmark-fill"></i><span class="save-text">В закладки</span>
+                    <button type="button" class="gl-toggle-btn" id="saveRecipeBtn" aria-pressed="false">
+                        <i class="bi bi-bookmark-fill" aria-hidden="true"></i><span class="save-text">В закладки</span>
                     </button>
                 </div>
             </div>
@@ -88,15 +90,15 @@
             <div class="gl-author-bar d-flex flex-wrap justify-content-between align-items-center gap-2 d-none"
                 id="authorControlBar">
                 <div class="small fw-semibold text-dark">
-                    <i class="bi bi-check-circle-fill text-danger me-1"></i>Вы автор этого рецепта
+                    <i class="bi bi-check-circle-fill text-danger me-1" aria-hidden="true"></i>Вы автор этого рецепта
                 </div>
                 <div class="d-flex gap-2">
                     <a href="#" class="gl-btn gl-btn-outline gl-btn-sm bg-white" id="editRecipeLink">
-                        <i class="bi bi-pencil"></i>Редактировать
+                        <i class="bi bi-pencil" aria-hidden="true"></i>Редактировать
                     </a>
                     <button type="button" class="gl-btn gl-btn-danger-outline gl-btn-sm bg-white" data-bs-toggle="modal"
                         data-bs-target="#deleteRecipeModal">
-                        <i class="bi bi-trash"></i>Удалить
+                        <i class="bi bi-trash" aria-hidden="true"></i>Удалить
                     </button>
                 </div>
             </div>
@@ -113,14 +115,14 @@
 
                 <!-- Видеоинструкция -->
                 <div class="card shadow-sm border-0 bg-white p-3 rounded-4 mb-5 d-none" id="recipeVideoCol">
-                    <h6 class="fw-bold mb-2"><i class="bi bi-play-circle me-1 text-danger"></i>Видео процесса
-                        приготовления</h6>
+                    <h2 class="h6 fw-bold mb-2"><i class="bi bi-play-circle me-1 text-danger"
+                            aria-hidden="true"></i>Видео процесса приготовления</h2>
                     <div class="ratio ratio-16x9 rounded-3 overflow-hidden border">
                         <iframe id="recipeVideoIframe" title="Видеорецепт" allowfullscreen></iframe>
                     </div>
                 </div>
 
-                <h4 class="fw-bold mb-4">Пошаговое приготовление</h4>
+                <h2 class="h4 fw-bold mb-4">Пошаговое приготовление</h2>
                 <div id="stepsList">
                     <div class="text-center py-4 text-secondary small">Загрузка шагов приготовления...</div>
                 </div>
@@ -128,10 +130,11 @@
                 <!-- Секция отзывов -->
                 <hr class="my-5">
                 <section id="commentsSection">
-                    <h5 class="fw-bold mb-3" id="commentsCountHeader"><i class="bi bi-chat-left-text me-2"></i>Отзывы
-                        кулинаров</h5>
+                    <h2 class="h5 fw-bold mb-3" id="commentsCountHeader"><i class="bi bi-chat-left-text me-2"
+                            aria-hidden="true"></i>Отзывы кулинаров</h2>
 
                     <form id="addCommentForm" class="mb-4">
+                        <label for="commentInput" class="visually-hidden">Текст отзыва к рецепту</label>
                         <textarea id="commentInput" class="form-control mb-2" rows="3"
                             placeholder="Оставьте ваш отзыв к рецепту..." required></textarea>
                         <button type="submit" class="gl-btn gl-btn-primary gl-btn-sm">Отправить отзыв</button>
@@ -145,16 +148,18 @@
 
             <div class="col-lg-4">
                 <div class="card shadow-sm border-0 rounded-4 sticky-top p-4 bg-white" style="top: 90px;">
-                    <h5 class="fw-bold mb-1">Ингредиенты</h5>
+                    <h2 class="h5 fw-bold mb-1">Ингредиенты</h2>
                     <small class="text-secondary d-block mb-3">Нажмите на продукт, чтобы отметить подготовленное</small>
 
                     <div class="gl-portion-box d-flex align-items-center justify-content-between mb-3">
                         <span class="small fw-semibold text-secondary">Порции:</span>
                         <div class="d-flex align-items-center gap-2">
-                            <button type="button" class="gl-portion-btn" id="decreaseServingsBtn">-</button>
-                            <span id="servingsCount" class="fw-bold text-nowrap px-1"
+                            <button type="button" class="gl-portion-btn" id="decreaseServingsBtn"
+                                aria-label="Уменьшить количество порций">-</button>
+                            <span id="servingsCount" class="fw-bold text-nowrap px-1" aria-live="polite"
                                 style="min-width: 76px; text-align: center;">2 порции</span>
-                            <button type="button" class="gl-portion-btn" id="increaseServingsBtn">+</button>
+                            <button type="button" class="gl-portion-btn" id="increaseServingsBtn"
+                                aria-label="Увеличить количество порций">+</button>
                         </div>
                     </div>
 
@@ -171,8 +176,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i
-                            class="bi bi-exclamation-triangle-fill me-2"></i>Удаление рецепта</h5>
+                    <h2 class="modal-title h5 fw-bold text-white"><i class="bi bi-exclamation-triangle-fill me-2"
+                            aria-hidden="true"></i>Удаление рецепта</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -194,7 +199,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-danger text-white py-3">
-                    <h5 class="modal-title fw-bold text-white"><i class="bi bi-trash-fill me-2"></i>Удаление отзыва</h5>
+                    <h2 class="modal-title h5 fw-bold text-white"><i class="bi bi-trash-fill me-2"
+                            aria-hidden="true"></i>Удаление отзыва</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 </div>
@@ -214,7 +220,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -28,7 +29,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navContent">
                     <ul class="navbar-nav me-auto ms-lg-3 mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">Рецепты</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="index.html">Рецепты</a></li>
                         <li class="nav-item"><a class="nav-link" href="pages/blog.html">Кулинарный блог</a></li>
                     </ul>
                     <div class="d-flex align-items-center gap-3" id="headerAuthContainer"></div>
@@ -37,7 +39,7 @@
         </nav>
     </header>
 
-    <main class="container my-5">
+    <main id="mainContent" tabindex="-1" class="container my-5">
         <!-- Промо-карточка недели -->
         <section id="featuredRecipeContainer" class="card border-0 shadow-sm rounded-4 p-4 p-lg-5 mb-5 bg-white">
             <div class="text-center py-4">
@@ -48,20 +50,20 @@
 
         <!-- Переключатель коллекций каталога -->
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
-            <ul class="nav nav-pills gap-2" id="catalogSourceTabs">
-                <li class="nav-item">
-                    <button class="nav-link active" id="tabChefsBtn" type="button">
-                        <i class="bi bi-journal-richtext me-1"></i>Рецепты шефов
+            <ul class="nav nav-pills gap-2" id="catalogSourceTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tabChefsBtn" type="button" role="tab" aria-selected="true">
+                        <i class="bi bi-journal-richtext me-1" aria-hidden="true"></i>Рецепты шефов
                     </button>
                 </li>
-                <li class="nav-item">
-                    <button class="nav-link" id="tabSubscriptionsBtn" type="button">
-                        <i class="bi bi-people-fill me-1"></i>Мои подписки
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabSubscriptionsBtn" type="button" role="tab" aria-selected="false">
+                        <i class="bi bi-people-fill me-1" aria-hidden="true"></i>Мои подписки
                     </button>
                 </li>
-                <li class="nav-item">
-                    <button class="nav-link" id="tabWorldBtn" type="button">
-                        <i class="bi bi-globe2 me-1"></i>Мировая кухня
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabWorldBtn" type="button" role="tab" aria-selected="false">
+                        <i class="bi bi-globe2 me-1" aria-hidden="true"></i>Мировая кухня
                     </button>
                 </li>
             </ul>
@@ -78,13 +80,15 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-text bg-white border-end-0 text-secondary"><i
                                 class="bi bi-search"></i></span>
+                        <label for="chefSearchInput" class="visually-hidden">Найти шефа по имени, логину или
+                            специализации</label>
                         <input type="text" id="chefSearchInput" class="form-control border-start-0"
                             placeholder="Найти шефа по имени, @логину или специализации...">
                     </div>
                 </div>
                 <div class="col-12 col-md-3">
                     <button type="button" id="toggleAllChefsBtn" class="gl-btn gl-btn-outline gl-btn-sm w-100">
-                        <i class="bi bi-person-lines-fill"></i><span>Все шефы сообщества</span>
+                        <i class="bi bi-person-lines-fill" aria-hidden="true"></i><span>Все шефы сообщества</span>
                     </button>
                 </div>
             </div>
@@ -94,13 +98,15 @@
 
         <!-- Быстрые категории раздела «Мировая кухня» -->
         <div id="worldCategoriesBar" class="d-none mb-4">
-            <div class="d-flex flex-wrap align-items-center gap-2">
+            <div class="d-flex flex-wrap align-items-center gap-2" role="group" aria-label="Категории мировой кухни">
                 <span class="small text-secondary me-1">Категория:</span>
-                <button type="button" class="gl-quick-tag active-sub" data-meal-cat="Seafood">Морепродукты</button>
-                <button type="button" class="gl-quick-tag" data-meal-cat="Pasta">Паста</button>
-                <button type="button" class="gl-quick-tag" data-meal-cat="Dessert">Десерты</button>
-                <button type="button" class="gl-quick-tag" data-meal-cat="Beef">Мясо</button>
-                <button type="button" class="gl-quick-tag" data-meal-cat="Vegetarian">Вегетарианское</button>
+                <button type="button" class="gl-quick-tag active-sub" aria-pressed="true"
+                    data-meal-cat="Seafood">Морепродукты</button>
+                <button type="button" class="gl-quick-tag" aria-pressed="false" data-meal-cat="Pasta">Паста</button>
+                <button type="button" class="gl-quick-tag" aria-pressed="false" data-meal-cat="Dessert">Десерты</button>
+                <button type="button" class="gl-quick-tag" aria-pressed="false" data-meal-cat="Beef">Мясо</button>
+                <button type="button" class="gl-quick-tag" aria-pressed="false"
+                    data-meal-cat="Vegetarian">Вегетарианское</button>
             </div>
         </div>
 
@@ -111,11 +117,13 @@
                     <div class="input-group">
                         <span class="input-group-text bg-white border-end-0 text-secondary"><i
                                 class="bi bi-search"></i></span>
+                        <label for="searchInput" class="visually-hidden">Поиск блюда по названию</label>
                         <input type="text" id="searchInput" class="form-control border-start-0"
                             placeholder="Поиск блюда по названию...">
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
+                    <label for="categoryFilter" class="visually-hidden">Фильтр по категории блюд</label>
                     <select id="categoryFilter" class="form-select">
                         <option value="all">Все категории блюд</option>
                         <option value="soup">Супы</option>
@@ -126,6 +134,7 @@
                     </select>
                 </div>
                 <div class="col-6 col-md-2">
+                    <label for="difficultyFilter" class="visually-hidden">Фильтр по сложности приготовления</label>
                     <select id="difficultyFilter" class="form-select">
                         <option value="all">Любая сложность</option>
                         <option value="easy">Легко</option>
@@ -135,7 +144,7 @@
                 </div>
                 <div class="col-12 col-md-2">
                     <button type="button" id="resetFiltersBtn" class="gl-btn gl-btn-outline gl-btn-sm w-100">
-                        <i class="bi bi-arrow-counterclockwise"></i>Сбросить
+                        <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>Сбросить
                     </button>
                 </div>
             </div>
@@ -147,6 +156,7 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white border-end-0 text-secondary"><i
                                     class="bi bi-funnel"></i></span>
+                            <label for="ingredientInput" class="visually-hidden">Добавить ингредиент в фильтр</label>
                             <input type="text" id="ingredientInput" class="form-control border-start-0"
                                 list="ingredientsDatalist" placeholder="Добавить ингредиент в фильтр...">
                             <button type="button" id="addIngredientTagBtn"
@@ -178,14 +188,14 @@
                         </div>
                     </div>
                 </div>
-                <div id="selectedIngredientsContainer" class="d-flex flex-wrap gap-2 mt-2"></div>
+                <div id="selectedIngredientsContainer" class="d-flex flex-wrap gap-2 mt-2" aria-live="polite"></div>
             </div>
         </section>
 
         <!-- Состояние отсутствия данных -->
-        <div id="recipesEmptyState" class="gl-empty-state d-none mb-5">
-            <i class="bi bi-search display-5 text-muted d-block mb-2"></i>
-            <h5 class="fw-bold mb-1">Рецепты не найдены</h5>
+        <div id="recipesEmptyState" class="gl-empty-state d-none mb-5" role="status" aria-live="polite">
+            <i class="bi bi-search display-5 text-muted d-block mb-2" aria-hidden="true"></i>
+            <h2 class="h5 fw-bold mb-1">Рецепты не найдены</h2>
             <p class="text-secondary small mb-3">Попробуйте изменить поисковый запрос или сбросить параметры фильтрации.
             </p>
             <button type="button" id="emptyStateResetBtn" class="gl-btn gl-btn-outline gl-btn-sm">Сбросить
@@ -210,10 +220,11 @@
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-light border-0 py-3">
                     <div>
-                        <h5 class="modal-title fw-bold mb-1" id="modalRecipeTitle">Загрузка...</h5>
+                        <h2 class="modal-title h5 fw-bold mb-1" id="modalRecipeTitle">Загрузка...</h2>
                         <div class="d-flex gap-3 small text-secondary">
-                            <span><i class="bi bi-clock text-danger me-1"></i><span id="modalRecipeTime"></span></span>
-                            <span><i class="bi bi-speedometer2 text-danger me-1"></i><span
+                            <span><i class="bi bi-clock text-danger me-1" aria-hidden="true"></i><span
+                                    id="modalRecipeTime"></span></span>
+                            <span><i class="bi bi-speedometer2 text-danger me-1" aria-hidden="true"></i><span
                                     id="modalRecipeDifficulty"></span></span>
                         </div>
                     </div>
@@ -221,7 +232,7 @@
                 </div>
                 <div class="modal-body p-4 pt-2">
                     <p id="modalRecipeDesc" class="text-secondary small mb-3"></p>
-                    <h6 class="fw-bold mb-2 small text-uppercase text-secondary">Состав продуктов:</h6>
+                    <h3 class="h6 fw-bold mb-2 small text-uppercase text-secondary">Состав продуктов:</h3>
                     <p id="modalRecipeIngredients" class="small bg-light p-3 rounded-3 border mb-0 text-secondary"></p>
                 </div>
                 <div class="modal-footer bg-light border-0 py-2">
@@ -238,7 +249,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 py-3">
-                    <h5 class="modal-title fw-bold" id="externalMealTitle">Рецепт мировой кухни</h5>
+                    <h2 class="modal-title h5 fw-bold" id="externalMealTitle">Рецепт мировой кухни</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body p-4 pt-0" id="externalMealBody"></div>
@@ -250,7 +261,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

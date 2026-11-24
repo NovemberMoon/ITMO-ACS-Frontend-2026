@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,10 +38,10 @@
         </nav>
     </header>
 
-    <main class="container my-auto py-5" style="max-width: 460px;">
+    <main id="mainContent" tabindex="-1" class="container my-auto py-5" style="max-width: 460px;">
         <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 bg-white">
             <div class="text-center mb-4">
-                <h3 class="fw-bold mb-1">Регистрация шефа</h3>
+                <h1 class="h3 fw-bold mb-1">Регистрация шефа</h1>
                 <p class="text-secondary small mb-0">Присоединяйтесь к кулинарному сообществу GustoLab</p>
             </div>
 
@@ -87,7 +88,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

@@ -105,37 +105,37 @@ document.addEventListener("DOMContentLoaded", async () => {
             const likesCount = recipeLikesCountMap.get(Number(recipe.id)) || 0;
 
             featuredContainer.innerHTML = `
-        <div class="row align-items-center g-4">
-          <div class="col-lg-7">
-            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-              <span class="badge bg-danger px-3 py-2"><i class="bi bi-fire me-1"></i>Популярный рецепт</span>
-              <span class="gl-badge">${LABELS.category[recipe.category] || recipe.category}</span>
-            </div>
-            <h1 class="display-6 fw-bold mb-3">${escapeHtml(recipe.title)}</h1>
-            <p class="text-secondary mb-4">${escapeHtml(recipe.description)}</p>
-            <div class="d-flex flex-wrap align-items-center gap-4 small text-secondary mb-4">
-              <span><i class="bi bi-clock me-1 text-danger"></i>${recipe.cooking_time_minutes} минут</span>
-              <span><i class="bi bi-speedometer2 me-1 text-danger"></i>Сложность: ${LABELS.difficulty[recipe.difficulty] || recipe.difficulty}</span>
-              <span><i class="bi bi-heart-fill me-1 text-danger"></i>${likesCount} отметок</span>
-              ${author ? `
-                <a href="pages/author.html?id=${author.id}" class="d-inline-flex align-items-center text-decoration-none text-dark fw-semibold">
-                  <img src="${author.avatar_url || DEFAULT_AVATAR}" class="rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" alt="${escapeHtml(author.name)}">
-                  ${escapeHtml(author.name)}
-                </a>
-              ` : ""}
-            </div>
-            <div class="d-flex flex-wrap gap-2">
-              <a href="pages/recipe.html?id=${recipe.id}" class="gl-btn gl-btn-primary px-4">Смотреть рецепт</a>
-              <button type="button" class="gl-btn gl-btn-outline btn-quick-view px-3" data-recipe-id="${recipe.id}">
-                <i class="bi bi-card-text"></i>Быстрый просмотр
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <img src="${recipe.image_url}" class="img-fluid rounded-4 shadow-sm w-100" alt="${escapeHtml(recipe.title)}" style="height: 290px; object-fit: cover;">
-          </div>
-        </div>
-      `;
+                <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                    <span class="badge bg-danger px-3 py-2"><i class="bi bi-fire me-1" aria-hidden="true"></i>Популярный рецепт</span>
+                    <span class="gl-badge">${LABELS.category[recipe.category] || recipe.category}</span>
+                    </div>
+                    <h1 class="display-6 fw-bold mb-3">${escapeHtml(recipe.title)}</h1>
+                    <p class="text-secondary mb-4">${escapeHtml(recipe.description)}</p>
+                    <div class="d-flex flex-wrap align-items-center gap-4 small text-secondary mb-4">
+                    <span><i class="bi bi-clock me-1 text-danger" aria-hidden="true"></i>${recipe.cooking_time_minutes} минут</span>
+                    <span><i class="bi bi-speedometer2 me-1 text-danger" aria-hidden="true"></i>Сложность: ${LABELS.difficulty[recipe.difficulty] || recipe.difficulty}</span>
+                    <span><i class="bi bi-heart-fill me-1 text-danger" aria-hidden="true"></i>${likesCount} отметок</span>
+                    ${author ? `
+                        <a href="pages/author.html?id=${author.id}" class="d-inline-flex align-items-center text-decoration-none text-dark fw-semibold">
+                        <img src="${author.avatar_url || DEFAULT_AVATAR}" class="rounded-circle me-1" style="width: 24px; height: 24px; object-fit: cover;" alt="">
+                        ${escapeHtml(author.name)}
+                        </a>
+                    ` : ""}
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                    <a href="pages/recipe.html?id=${recipe.id}" class="gl-btn gl-btn-primary px-4">Смотреть рецепт</a>
+                    <button type="button" class="gl-btn gl-btn-outline btn-quick-view px-3" data-recipe-id="${recipe.id}">
+                        <i class="bi bi-card-text" aria-hidden="true"></i>Быстрый просмотр
+                    </button>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <img src="${recipe.image_url}" class="img-fluid rounded-4 shadow-sm w-100" alt="${escapeHtml(recipe.title)}" style="height: 290px; object-fit: cover;">
+                </div>
+                </div>
+            `;
         } catch {
             featuredContainer.classList.add("d-none");
         }
@@ -144,11 +144,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function loadChefsRecipes() {
         if (!recipesGrid) return;
         recipesGrid.innerHTML = `
-      <div class="col-12 text-center py-5">
-        <div class="spinner-border text-danger" role="status"></div>
-        <p class="text-secondary small mt-2">Загрузка рецептов из кулинарной базы...</p>
-      </div>
-    `;
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-danger" role="status"></div>
+                <p class="text-secondary small mt-2">Загрузка рецептов из кулинарной базы...</p>
+            </div>
+            `;
 
         const query = searchInput ? searchInput.value.trim() : "";
         const category = categoryFilter ? categoryFilter.value : "all";
@@ -195,14 +195,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         } catch {
             recipesGrid.innerHTML = `
-        <div class="col-12">
-          <div class="alert alert-light border text-center py-4">
-            <p class="mb-2 text-danger fw-semibold">Не удалось загрузить каталог рецептов.</p>
-            <p class="small text-secondary mb-3">Проверьте соединение с сервером и повторите попытку.</p>
-            <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="btnRetryCatalog">Повторить попытку</button>
-          </div>
-        </div>
-      `;
+                <div class="col-12">
+                <div class="alert alert-light border text-center py-4">
+                    <p class="mb-2 text-danger fw-semibold">Не удалось загрузить каталог рецептов.</p>
+                    <p class="small text-secondary mb-3">Проверьте соединение с сервером и повторите попытку.</p>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm" id="btnRetryCatalog">Повторить попытку</button>
+                </div>
+                </div>
+            `;
             document.getElementById("btnRetryCatalog")?.addEventListener("click", loadChefsRecipes);
         }
     }
@@ -222,38 +222,38 @@ document.addEventListener("DOMContentLoaded", async () => {
             const author = usersMap.get(Number(recipe.userId));
             const likesCount = recipeLikesCountMap.get(Number(recipe.id)) || 0;
             return `
-        <div class="col">
-          <article class="card h-100 gl-card">
-            <img src="${recipe.image_url}" class="gl-card-img" alt="${escapeHtml(recipe.title)}">
-            <div class="card-body d-flex flex-column p-3">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="gl-badge">${LABELS.category[recipe.category] || recipe.category}</span>
-                <span class="small text-secondary"><i class="bi bi-clock me-1"></i>${recipe.cooking_time_minutes} мин</span>
-              </div>
-              <h5 class="card-title fw-bold fs-6 mb-2">${escapeHtml(recipe.title)}</h5>
-              <p class="card-text text-secondary small flex-grow-1 mb-3">${escapeHtml(recipe.description)}</p>
-              ${author ? `
-                <div class="mb-2">
-                  <a href="pages/author.html?id=${author.id}" class="d-inline-flex align-items-center text-decoration-none text-secondary smaller">
-                    <img src="${author.avatar_url || DEFAULT_AVATAR}" class="rounded-circle me-1" style="width: 20px; height: 20px; object-fit: cover;" alt="${escapeHtml(author.name)}">
-                    <span>${escapeHtml(author.name)}</span>
-                  </a>
+                <div class="col">
+                <article class="card h-100 gl-card">
+                    <img src="${recipe.image_url}" class="gl-card-img" alt="${escapeHtml(recipe.title)}">
+                    <div class="card-body d-flex flex-column p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="gl-badge">${LABELS.category[recipe.category] || recipe.category}</span>
+                        <span class="small text-secondary"><i class="bi bi-clock me-1" aria-hidden="true"></i>${recipe.cooking_time_minutes} мин</span>
+                    </div>
+                    <h2 class="card-title h6 fw-bold fs-6 mb-2">${escapeHtml(recipe.title)}</h2>
+                    <p class="card-text text-secondary small flex-grow-1 mb-3">${escapeHtml(recipe.description)}</p>
+                    ${author ? `
+                        <div class="mb-2">
+                        <a href="pages/author.html?id=${author.id}" class="d-inline-flex align-items-center text-decoration-none text-secondary smaller">
+                            <img src="${author.avatar_url || DEFAULT_AVATAR}" class="rounded-circle me-1" style="width: 20px; height: 20px; object-fit: cover;" alt="">
+                            <span>${escapeHtml(author.name)}</span>
+                        </a>
+                        </div>
+                    ` : ""}
+                    <div class="d-flex justify-content-between align-items-center small text-secondary pt-2 border-top">
+                        <span>Сложность: <strong>${LABELS.difficulty[recipe.difficulty] || recipe.difficulty}</strong></span>
+                        <span><i class="bi bi-heart-fill text-danger me-1" aria-hidden="true"></i>${likesCount}</span>
+                    </div>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0 pb-3 d-flex gap-2">
+                    <a href="pages/recipe.html?id=${recipe.id}" class="gl-btn gl-btn-secondary gl-btn-sm w-100" aria-label="Открыть рецепт: ${escapeHtml(recipe.title)}">Открыть</a>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm btn-quick-view px-3" data-recipe-id="${recipe.id}" aria-label="Быстрый просмотр: ${escapeHtml(recipe.title)}" title="Быстрый просмотр">
+                        <i class="bi bi-card-text" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                </article>
                 </div>
-              ` : ""}
-              <div class="d-flex justify-content-between align-items-center small text-secondary pt-2 border-top">
-                <span>Сложность: <strong>${LABELS.difficulty[recipe.difficulty] || recipe.difficulty}</strong></span>
-                <span><i class="bi bi-heart-fill text-danger me-1"></i>${likesCount}</span>
-              </div>
-            </div>
-            <div class="card-footer bg-white border-0 pt-0 pb-3 d-flex gap-2">
-              <a href="pages/recipe.html?id=${recipe.id}" class="gl-btn gl-btn-secondary gl-btn-sm w-100">Открыть</a>
-              <button type="button" class="gl-btn gl-btn-outline gl-btn-sm btn-quick-view px-3" data-recipe-id="${recipe.id}" title="Быстрый просмотр">
-                <i class="bi bi-card-text"></i>
-              </button>
-            </div>
-          </article>
-        </div>
-      `;
+            `;
         }).join("");
     }
 
@@ -268,32 +268,32 @@ document.addEventListener("DOMContentLoaded", async () => {
             const subRecord = subsByFollowingId.get(Number(chef.id));
             const isSub = Boolean(subRecord);
             return `
-        <div class="col">
-          <div class="card h-100 border rounded-3 p-3 bg-light">
-            <div class="d-flex align-items-center gap-3 mb-2">
-              <img src="${chef.avatar_url || DEFAULT_AVATAR}" class="rounded-circle flex-shrink-0" style="width: 46px; height: 46px; object-fit: cover;" alt="${escapeHtml(chef.name)}">
-              <div class="overflow-hidden">
-                <h6 class="fw-bold mb-0 text-truncate">
-                  <a href="pages/author.html?id=${chef.id}" class="text-dark">${escapeHtml(chef.name)}</a>
-                </h6>
-                <span class="text-muted smaller d-block">@${escapeHtml(chef.username)}</span>
-              </div>
-            </div>
-            <p class="smaller text-secondary mb-3 flex-grow-1">${escapeHtml(chef.specialty || "Кулинар сообщества GustoLab")}</p>
-            <div class="d-flex gap-2">
-              <a href="pages/author.html?id=${chef.id}" class="gl-btn gl-btn-outline gl-btn-sm flex-grow-1">Профиль</a>
-              ${currentUser ? `
-                <button type="button" class="gl-toggle-btn ${isSub ? "active-sub" : ""} btn-toggle-chef-sub"
-                        data-chef-id="${chef.id}" data-sub-id="${subRecord ? subRecord.id : ""}">
-                  <span>${isSub ? "Вы подписаны" : "Подписаться"}</span>
-                </button>
-              ` : `
-                <a href="pages/login.html" class="gl-btn gl-btn-primary gl-btn-sm">Подписаться</a>
-              `}
-            </div>
-          </div>
-        </div>
-      `;
+                <div class="col">
+                <div class="card h-100 border rounded-3 p-3 bg-light">
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                    <img src="${chef.avatar_url || DEFAULT_AVATAR}" class="rounded-circle flex-shrink-0" style="width: 46px; height: 46px; object-fit: cover;" alt="">
+                    <div class="overflow-hidden">
+                        <h3 class="h6 fw-bold mb-0 text-truncate">
+                        <a href="pages/author.html?id=${chef.id}" class="text-dark">${escapeHtml(chef.name)}</a>
+                        </h3>
+                        <span class="text-muted smaller d-block">@${escapeHtml(chef.username)}</span>
+                    </div>
+                    </div>
+                    <p class="smaller text-secondary mb-3 flex-grow-1">${escapeHtml(chef.specialty || "Кулинар сообщества GustoLab")}</p>
+                    <div class="d-flex gap-2">
+                    <a href="pages/author.html?id=${chef.id}" class="gl-btn gl-btn-outline gl-btn-sm flex-grow-1">Профиль</a>
+                    ${currentUser ? `
+                        <button type="button" class="gl-toggle-btn ${isSub ? "active-sub" : ""} btn-toggle-chef-sub"
+                                data-chef-id="${chef.id}" data-sub-id="${subRecord ? subRecord.id : ""}" aria-pressed="${isSub}">
+                        <span>${isSub ? "Вы подписаны" : "Подписаться"}</span>
+                        </button>
+                    ` : `
+                        <a href="pages/login.html" class="gl-btn gl-btn-primary gl-btn-sm">Подписаться</a>
+                    `}
+                    </div>
+                </div>
+                </div>
+            `;
         }).join("");
     }
 
@@ -315,11 +315,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!isAuth) {
             if (followedChefsStrip) {
                 followedChefsStrip.innerHTML = `
-          <div class="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
-            <span class="small text-secondary"><i class="bi bi-info-circle me-1 text-danger"></i>Войдите в аккаунт, чтобы подписаться на шефов и следить за их новыми рецептами.</span>
-            <a href="pages/login.html" class="gl-btn gl-btn-primary gl-btn-sm">Войти в аккаунт</a>
-          </div>
-        `;
+                    <div class="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
+                        <span class="small text-secondary"><i class="bi bi-info-circle me-1 text-danger" aria-hidden="true"></i>Войдите в аккаунт, чтобы подписаться на шефов и следить за их новыми рецептами.</span>
+                        <a href="pages/login.html" class="gl-btn gl-btn-primary gl-btn-sm">Войти в аккаунт</a>
+                    </div>
+                    `;
             }
             const filteredChefs = allUsersList.filter((u) =>
                 !searchQ ||
@@ -340,18 +340,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (followedChefsStrip) {
                 if (subs.length === 0) {
                     followedChefsStrip.innerHTML = `
-            <span class="small text-secondary">Вы пока не подписаны ни на одного шефа. Найдите интересных авторов ниже:</span>
-          `;
+                        <span class="small text-secondary">Вы пока не подписаны ни на одного шефа. Найдите интересных авторов ниже:</span>
+                    `;
                 } else {
                     const chipsHtml = subs.map((s) => {
                         const chef = usersMap.get(Number(s.following_id));
                         if (!chef) return "";
                         return `
-              <a href="pages/author.html?id=${chef.id}" class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill border bg-light text-decoration-none text-dark small">
-                <img src="${chef.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;" alt="${escapeHtml(chef.name)}">
-                <span class="fw-semibold">${escapeHtml(chef.name)}</span>
-              </a>
-            `;
+                            <a href="pages/author.html?id=${chef.id}" class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill border bg-light text-decoration-none text-dark small">
+                                <img src="${chef.avatar_url || DEFAULT_AVATAR}" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;" alt="}">
+                                <span class="fw-semibold">${escapeHtml(chef.name)}</span>
+                            </a>
+                            `;
                     }).join("");
                     followedChefsStrip.innerHTML = `<span class="small text-secondary me-1">Ваши шефы:</span>${chipsHtml}`;
                 }
@@ -377,10 +377,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             recipesGrid.innerHTML = `
-        <div class="col-12 text-center py-4">
-          <div class="spinner-border text-danger" role="status"></div>
-        </div>
-      `;
+                <div class="col-12 text-center py-4">
+                <div class="spinner-border text-danger" role="status"></div>
+                </div>
+            `;
 
             const allRecipes = await API.get("/recipes");
             const feedRecipes = (Array.isArray(allRecipes) ? allRecipes : []).filter((r) =>
@@ -455,11 +455,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function loadWorldRecipes() {
         if (!recipesGrid) return;
         recipesGrid.innerHTML = `
-      <div class="col-12 text-center py-5">
-        <div class="spinner-border text-danger" role="status"></div>
-        <p class="text-secondary small mt-2">Загрузка блюд мировой кухни...</p>
-      </div>
-    `;
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-danger" role="status"></div>
+                <p class="text-secondary small mt-2">Загрузка блюд мировой кухни...</p>
+            </div>
+            `;
         if (paginationContainer) paginationContainer.innerHTML = "";
 
         const meals = await ExternalAPI.getMealsByCategory(currentWorldCategory);
@@ -472,19 +472,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         const catRu = ExternalAPI.getCategoryRuLabel(currentWorldCategory);
 
         recipesGrid.innerHTML = meals.map((meal) => `
-      <div class="col">
-        <article class="card h-100 gl-card">
-          <img src="${meal.strMealThumb}" class="gl-card-img" alt="${escapeHtml(meal.strMeal)}">
-          <div class="card-body d-flex flex-column p-3">
-            <span class="gl-badge align-self-start mb-2">${escapeHtml(catRu)}</span>
-            <h5 class="card-title fw-bold fs-6 mb-3 flex-grow-1">${escapeHtml(meal.strMeal)}</h5>
-            <button type="button" class="gl-btn gl-btn-outline gl-btn-sm w-100 btn-world-view" data-meal-id="${meal.idMeal}">
-              <i class="bi bi-journal-text me-1"></i>Смотреть рецепт
-            </button>
-          </div>
-        </article>
-      </div>
-    `).join("");
+            <div class="col">
+                <article class="card h-100 gl-card">
+                <img src="${meal.strMealThumb}" class="gl-card-img" alt="${escapeHtml(meal.strMeal)}">
+                <div class="card-body d-flex flex-column p-3">
+                    <span class="gl-badge align-self-start mb-2">${escapeHtml(catRu)}</span>
+                    <h2 class="card-title h6 fw-bold fs-6 mb-3 flex-grow-1">${escapeHtml(meal.strMeal)}</h2>
+                    <button type="button" class="gl-btn gl-btn-outline gl-btn-sm w-100 btn-world-view" data-meal-id="${meal.idMeal}">
+                    <i class="bi bi-journal-text me-1" aria-hidden="true"></i>Смотреть рецепт
+                    </button>
+                </div>
+                </article>
+            </div>
+            `).join("");
     }
 
     document.addEventListener("click", async (e) => {
@@ -527,36 +527,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             modalTitle.textContent = meal.title;
             modalBody.innerHTML = `
-        <div class="row g-4">
-          <div class="col-md-5">
-            <img src="${meal.image_url}" class="img-fluid rounded-3 mb-3 shadow-sm w-100" alt="${escapeHtml(meal.title)}">
-            <div class="d-flex gap-2 flex-wrap mb-3">
-              <span class="badge bg-secondary">${escapeHtml(meal.area)}</span>
-              <span class="badge bg-light text-dark border">${escapeHtml(meal.category)}</span>
-            </div>
-            ${meal.video_url ? `
-              <a href="${meal.video_url}" target="_blank" rel="noopener noreferrer" class="gl-btn gl-btn-outline gl-btn-sm w-100">
-                <i class="bi bi-play-circle text-danger"></i>Смотреть видеорецепт
-              </a>
-            ` : ""}
-          </div>
-          <div class="col-md-7">
-            <h6 class="fw-bold mb-2 small text-uppercase text-secondary">Состав продуктов:</h6>
-            <ul class="list-group list-group-flush small mb-3">
-              ${meal.ingredients.map((ing) => `
-                <li class="list-group-item d-flex justify-content-between px-0 py-1">
-                  <span>${escapeHtml(ing.name)}</span>
-                  <span class="text-secondary">${escapeHtml(ing.amount)}</span>
-                </li>
-              `).join("")}
-            </ul>
-            <h6 class="fw-bold mb-2 small text-uppercase text-secondary">Инструкция приготовления:</h6>
-            <ol class="small text-secondary ps-3 mb-0">
-              ${meal.steps.map((step) => `<li class="mb-2">${escapeHtml(step)}</li>`).join("")}
-            </ol>
-          </div>
-        </div>
-      `;
+                <div class="row g-4">
+                <div class="col-md-5">
+                    <img src="${meal.image_url}" class="img-fluid rounded-3 mb-3 shadow-sm w-100" alt="${escapeHtml(meal.title)}">
+                    <div class="d-flex gap-2 flex-wrap mb-3">
+                    <span class="badge bg-secondary">${escapeHtml(meal.area)}</span>
+                    <span class="badge bg-light text-dark border">${escapeHtml(meal.category)}</span>
+                    </div>
+                    ${meal.video_url ? `
+                    <a href="${meal.video_url}" target="_blank" rel="noopener noreferrer" class="gl-btn gl-btn-outline gl-btn-sm w-100">
+                        <i class="bi bi-play-circle text-danger" aria-hidden="true"></i>Смотреть видеорецепт
+                    </a>
+                    ` : ""}
+                </div>
+                <div class="col-md-7">
+                    <h3 class="h6 fw-bold mb-2 small text-uppercase text-secondary">Состав продуктов:</h3>
+                    <ul class="list-group list-group-flush small mb-3">
+                    ${meal.ingredients.map((ing) => `
+                        <li class="list-group-item d-flex justify-content-between px-0 py-1">
+                        <span>${escapeHtml(ing.name)}</span>
+                        <span class="text-secondary">${escapeHtml(ing.amount)}</span>
+                        </li>
+                    `).join("")}
+                    </ul>
+                    <h3 class="h6 fw-bold mb-2 small text-uppercase text-secondary">Инструкция приготовления:</h3>
+                    <ol class="small text-secondary ps-3 mb-0">
+                    ${meal.steps.map((step) => `<li class="mb-2">${escapeHtml(step)}</li>`).join("")}
+                    </ol>
+                </div>
+                </div>
+            `;
         }
     });
 
@@ -564,6 +564,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         tabChefsBtn?.classList.toggle("active", tabName === "chefs");
         tabSubscriptionsBtn?.classList.toggle("active", tabName === "subscriptions");
         tabWorldBtn?.classList.toggle("active", tabName === "world");
+
+        tabChefsBtn?.setAttribute("aria-selected", String(tabName === "chefs"));
+        tabSubscriptionsBtn?.setAttribute("aria-selected", String(tabName === "subscriptions"));
+        tabWorldBtn?.setAttribute("aria-selected", String(tabName === "world"));
 
         localFiltersCard?.classList.toggle("d-none", tabName !== "chefs");
         subscriptionsFeedBar?.classList.toggle("d-none", tabName !== "subscriptions");
@@ -590,8 +594,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     worldCategoriesBar?.querySelectorAll(".gl-quick-tag[data-meal-cat]").forEach((btn) => {
         btn.addEventListener("click", () => {
-            worldCategoriesBar.querySelectorAll(".gl-quick-tag").forEach((b) => b.classList.remove("active-sub"));
+            worldCategoriesBar.querySelectorAll(".gl-quick-tag").forEach((b) => {
+                b.classList.remove("active-sub");
+                b.setAttribute("aria-pressed", "false");
+            });
             btn.classList.add("active-sub");
+            btn.setAttribute("aria-pressed", "true");
             currentWorldCategory = btn.dataset.mealCat;
             loadWorldRecipes();
         });
@@ -600,11 +608,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     function renderSelectedTags() {
         if (!selectedIngredientsContainer) return;
         selectedIngredientsContainer.innerHTML = Array.from(selectedIngredients).map((tag) => `
-      <span class="gl-filter-tag">
-        ${escapeHtml(tag)}
-        <button type="button" class="gl-filter-tag-remove" data-ingredient="${escapeHtml(tag)}">&times;</button>
-      </span>
-    `).join("");
+            <span class="gl-filter-tag">
+                ${escapeHtml(tag)}
+                <button type="button" class="gl-filter-tag-remove" data-ingredient="${escapeHtml(tag)}" aria-label="Удалить ингредиент ${escapeHtml(tag)} из фильтра">&times;</button>
+            </span>
+            `).join("");
     }
 
     function addIngredient(val) {

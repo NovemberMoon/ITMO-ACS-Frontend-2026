@@ -14,13 +14,14 @@
 </head>
 
 <body>
+    <a href="#mainContent" class="gl-skip-link">Перейти к основному содержимому</a>
 
     <!-- Навигация -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark gl-navbar py-0" aria-label="Основная навигация">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
-                    <i class="bi bi-fire fs-4 me-2 text-warning"></i>GustoLab
+                    <i class="bi bi-fire fs-4 me-2 text-warning" aria-hidden="true"></i>GustoLab
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
                     aria-controls="navContent" aria-expanded="false" aria-label="Переключить навигацию">
@@ -37,8 +38,9 @@
         </nav>
     </header>
 
-    <main class="container my-5" style="max-width: 900px;">
-        <a href="../index.html" class="gl-back-link"><i class="bi bi-arrow-left me-1"></i>Назад в каталог</a>
+    <main id="mainContent" tabindex="-1" class="container my-5" style="max-width: 900px;">
+        <a href="../index.html" class="gl-back-link"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Назад в
+            каталог</a>
 
         <!-- Карточка шеф-повара -->
         <section class="card shadow-sm border-0 rounded-4 p-4 p-md-5 mb-5 bg-white" id="authorProfileCard">
@@ -49,21 +51,21 @@
                 <div class="text-center text-md-start flex-grow-1">
                     <div
                         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
-                        <h2 class="fw-bold mb-0" id="authorNameHeader">Загрузка профиля...</h2>
+                        <h1 class="h2 fw-bold mb-0" id="authorNameHeader">Загрузка профиля...</h1>
                         <span class="text-muted small" id="authorHandleText"></span>
                         <span class="badge bg-light text-secondary border" id="authorSpecialtyBadge"></span>
                     </div>
                     <p class="text-secondary small mb-3" id="authorBioText" style="max-width: 640px;"></p>
                     <div
                         class="d-flex flex-wrap justify-content-center justify-content-md-start gap-4 small text-secondary mb-3">
-                        <span><i class="bi bi-geo-alt me-1 text-danger"></i><span
+                        <span><i class="bi bi-geo-alt me-1 text-danger" aria-hidden="true"></i><span
                                 id="authorLocationText">--</span></span>
                         <span><strong id="authorRecipesCount">0</strong> рецептов</span>
                         <span><strong id="authorBlogsCount">0</strong> статей</span>
                         <span><strong id="followersCount">0</strong> подписчиков</span>
                     </div>
-                    <button type="button" class="gl-toggle-btn" id="mainAuthorSubBtn">
-                        <i class="bi bi-person-plus"></i><span>Подписаться на автора</span>
+                    <button type="button" class="gl-toggle-btn" id="mainAuthorSubBtn" aria-pressed="false">
+                        <i class="bi bi-person-plus" aria-hidden="true"></i><span>Подписаться на автора</span>
                     </button>
                 </div>
             </div>
@@ -71,14 +73,14 @@
 
         <!-- Рецепты и статьи автора -->
         <section class="mb-5">
-            <h4 class="fw-bold mb-3">Опубликованные рецепты</h4>
+            <h2 class="h4 fw-bold mb-3">Опубликованные рецепты</h2>
             <div id="authorRecipesList">
                 <div class="text-secondary small">Загрузка рецептов автора...</div>
             </div>
         </section>
 
         <section>
-            <h4 class="fw-bold mb-3">Статьи автора</h4>
+            <h2 class="h4 fw-bold mb-3">Статьи автора</h2>
             <div id="authorBlogsList">
                 <div class="text-secondary small">Загрузка статей автора...</div>
             </div>
@@ -89,7 +91,7 @@
     <footer class="gl-footer py-4 mt-auto">
         <div class="container text-center small">
             <p class="mb-1 text-light">&copy; 2026 GustoLab. Сообщество кулинаров и авторские рецепты.</p>
-            <p class="mb-0 text-secondary">Кулинарное вдохновение каждый день.</p>
+            <p class="mb-0 gl-footer-muted">Кулинарное вдохновение каждый день.</p>
         </div>
     </footer>
 

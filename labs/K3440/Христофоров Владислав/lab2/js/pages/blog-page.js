@@ -163,45 +163,47 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const coverHtml = b.image_url
                     ? `<img src="${b.image_url}" class="img-fluid rounded-3 w-100" style="height: 200px; object-fit: cover;" alt="${escapeHtml(b.title)}">`
                     : `<div class="rounded-3 bg-light border d-flex align-items-center justify-content-center text-secondary w-100" style="height: 200px;">
-               <i class="bi bi-journal-richtext display-4 opacity-50"></i>
-             </div>`;
+                        <i class="bi bi-journal-richtext display-4 opacity-50" aria-hidden="true"></i>
+                        </div>`;
 
                 return `
-          <article class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 blog-card">
-            <div class="row g-4 align-items-center">
-              <div class="col-md-5">
-                ${coverHtml}
-              </div>
-              <div class="col-md-7">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <a href="author.html?id=${b.userId}" class="text-secondary small fw-semibold text-decoration-none">
-                    <img src="${authorAvatar}" class="rounded-circle me-1" style="width: 22px; height: 22px; object-fit: cover;" alt="${escapeHtml(authorName)}">
-                    ${escapeHtml(authorName)}
-                  </a>
-                  <span class="text-muted small">&bull; ${formatDateRu(b.created_at)}</span>
-                </div>
-                <h4 class="fw-bold fs-5 mb-2">
-                  <a href="blog-post.html?id=${b.id}" class="text-dark">${escapeHtml(b.title)}</a>
-                </h4>
-                <p class="text-secondary small mb-3">${escapeHtml(b.summary)}</p>
-                <div class="d-flex justify-content-between align-items-center small text-secondary">
-                  <div>
-                    <span class="me-3"><i class="bi bi-heart-fill text-danger me-1"></i>${likesCount}</span>
-                    <span><i class="bi bi-clock me-1"></i>${escapeHtml(b.read_time || "5 мин")}</span>
-                  </div>
-                  <a href="blog-post.html?id=${b.id}" class="fw-bold">Читать далее &rarr;</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        `;
+                    <article class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 blog-card">
+                        <div class="row g-4 align-items-center">
+                        <div class="col-md-5">
+                            ${coverHtml}
+                        </div>
+                        <div class="col-md-7">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                            <a href="author.html?id=${b.userId}" class="text-secondary small fw-semibold text-decoration-none">
+                                <img src="${authorAvatar}" class="rounded-circle me-1" style="width: 22px; height: 22px; object-fit: cover;" alt="">
+                                ${escapeHtml(authorName)}
+                            </a>
+                            <span class="text-muted small">&bull; ${formatDateRu(b.created_at)}</span>
+                            </div>
+                            <h2 class="h5 fw-bold fs-5 mb-2">
+                            <a href="blog-post.html?id=${b.id}" class="text-dark">${escapeHtml(b.title)}</a>
+                            </h2>
+                            <p class="text-secondary small mb-3">${escapeHtml(b.summary)}</p>
+                            <div class="d-flex justify-content-between align-items-center small text-secondary">
+                            <div>
+                                <span class="me-3"><i class="bi bi-heart-fill text-danger me-1" aria-hidden="true"></i>${likesCount}</span>
+                                <span><i class="bi bi-clock me-1" aria-hidden="true"></i>${escapeHtml(b.read_time || "5 мин")}</span>
+                            </div>
+                            <a href="blog-post.html?id=${b.id}" class="fw-bold" aria-label="Читать далее: ${escapeHtml(b.title)}">Читать далее &rarr;</a>
+                            </div>
+                        </div>
+                        </div>
+                    </article>
+                    `;
             }).join("");
         }
 
         blogTabAllBtn?.addEventListener("click", () => {
             blogFeedMode = "all";
             blogTabAllBtn.classList.add("active");
+            blogTabAllBtn.setAttribute("aria-selected", "true");
             blogTabSubsBtn?.classList.remove("active");
+            blogTabSubsBtn?.setAttribute("aria-selected", "false");
             currentPage = 1;
             loadBlogs();
         });
@@ -209,7 +211,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         blogTabSubsBtn?.addEventListener("click", () => {
             blogFeedMode = "subscriptions";
             blogTabSubsBtn.classList.add("active");
+            blogTabSubsBtn.setAttribute("aria-selected", "true");
             blogTabAllBtn?.classList.remove("active");
+            blogTabAllBtn?.setAttribute("aria-selected", "false");
             currentPage = 1;
             loadBlogs();
         });
@@ -244,6 +248,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (likeBlogBtn && currentUser) {
                 const isLiked = postLikes.some((item) => Number(item.userId) === Number(currentUser.id));
                 likeBlogBtn.classList.toggle("active-like", isLiked);
+                likeBlogBtn.setAttribute("aria-pressed", String(isLiked));
             }
         }
 
@@ -305,17 +310,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         } catch {
             document.querySelector("main").innerHTML = `
-        <div class="container py-5 text-center">
-          <h3 class="fw-bold mb-2">Статья не найдена</h3>
-          <a href="blog.html" class="gl-btn gl-btn-primary mt-2">Вернуться в блог</a>
-        </div>
-      `;
+                <div class="container py-5 text-center">
+                <h3 class="fw-bold mb-2">Статья не найдена</h3>
+                <a href="blog.html" class="gl-btn gl-btn-primary mt-2">Вернуться в блог</a>
+                </div>
+            `;
         }
 
         function syncSubBtn() {
             if (!subBtn) return;
             const isSub = Boolean(activeSubscription);
             subBtn.classList.toggle("active-sub", isSub);
+            subBtn.setAttribute("aria-pressed", String(isSub));
             const span = subBtn.querySelector("span");
             if (span) span.textContent = isSub ? "Вы подписаны" : "Подписаться";
         }

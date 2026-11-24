@@ -84,32 +84,32 @@ export const Auth = {
 
         if (user && this.isAuthenticated()) {
             container.innerHTML = `
-        <div class="dropdown">
-          <button class="gl-btn gl-btn-primary gl-btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-plus-lg"></i>Создать
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-            <li><a class="dropdown-item py-2" href="${pagesPrefix}create-recipe.html"><i class="bi bi-journal-plus me-2 text-danger"></i>Новый рецепт</a></li>
-            <li><a class="dropdown-item py-2" href="${pagesPrefix}create-blog-post.html"><i class="bi bi-pencil-square me-2 text-success"></i>Новая статья</a></li>
-          </ul>
-        </div>
-        <div class="d-flex align-items-center ps-3 border-start border-secondary">
-          <a href="${pagesPrefix}profile.html" class="d-flex align-items-center text-decoration-none text-light me-3">
-            <img src="${user.avatar_url || DEFAULT_AVATAR}" 
-                 class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;" alt="${escapeHtml(user.name)}">
-            <span class="small fw-semibold text-truncate" style="max-width: 125px;">${escapeHtml(user.name)}</span>
-          </a>
-          <button type="button" class="btn btn-outline-danger btn-sm py-1 px-2" id="btnLogoutHeader" title="Выйти из аккаунта">
-            <i class="bi bi-box-arrow-right"></i>
-          </button>
-        </div>
-      `;
+                <div class="dropdown">
+                <button class="gl-btn gl-btn-primary gl-btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i>Создать
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                    <li><a class="dropdown-item py-2" href="${pagesPrefix}create-recipe.html"><i class="bi bi-journal-plus me-2 text-danger" aria-hidden="true"></i>Новый рецепт</a></li>
+                    <li><a class="dropdown-item py-2" href="${pagesPrefix}create-blog-post.html"><i class="bi bi-pencil-square me-2 text-success" aria-hidden="true"></i>Новая статья</a></li>
+                </ul>
+                </div>
+                <div class="d-flex align-items-center ps-3 border-start border-secondary">
+                <a href="${pagesPrefix}profile.html" class="d-flex align-items-center text-decoration-none text-light me-3">
+                    <img src="${user.avatar_url || DEFAULT_AVATAR}" 
+                        class="rounded-circle me-2" style="width: 34px; height: 34px; object-fit: cover;" alt="">
+                    <span class="small fw-semibold text-truncate" style="max-width: 125px;">${escapeHtml(user.name)}</span>
+                </a>
+                <button type="button" class="btn btn-outline-danger btn-sm py-1 px-2" id="btnLogoutHeader" aria-label="Выйти из аккаунта" title="Выйти из аккаунта">
+                    <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+                </button>
+                </div>
+            `;
             document.getElementById("btnLogoutHeader")?.addEventListener("click", () => this.logout());
         } else {
             container.innerHTML = `
-        <a href="${pagesPrefix}login.html" class="gl-btn gl-btn-outline gl-btn-sm">Вход</a>
-        <a href="${pagesPrefix}register.html" class="gl-btn gl-btn-primary gl-btn-sm">Регистрация</a>
-      `;
+                <a href="${pagesPrefix}login.html" class="gl-btn gl-btn-outline gl-btn-sm">Вход</a>
+                <a href="${pagesPrefix}register.html" class="gl-btn gl-btn-primary gl-btn-sm">Регистрация</a>
+            `;
         }
     }
 };

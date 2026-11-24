@@ -66,12 +66,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         } catch {
             document.querySelector("main").innerHTML = `
-        <div class="container py-5 text-center">
-          <h3 class="fw-bold mb-2">Рецепт не найден</h3>
-          <p class="text-secondary small mb-4">Возможно, он был удалён автором или ссылка неверна.</p>
-          <a href="../index.html" class="gl-btn gl-btn-primary">Вернуться в каталог</a>
-        </div>
-      `;
+                <div class="container py-5 text-center">
+                <h3 class="fw-bold mb-2">Рецепт не найден</h3>
+                <p class="text-secondary small mb-4">Возможно, он был удалён автором или ссылка неверна.</p>
+                <a href="../index.html" class="gl-btn gl-btn-primary">Вернуться в каталог</a>
+                </div>
+            `;
         }
     }
 
@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (currentUser) {
             const isSaved = (currentUser.bookmarked_recipe_ids || []).map(Number).includes(Number(currentRecipe.id));
             saveBtn?.classList.toggle("active-save", isSaved);
+            saveBtn?.setAttribute("aria-pressed", String(isSaved));
             const saveText = saveBtn?.querySelector(".save-text");
             if (saveText) saveText.textContent = isSaved ? "В закладках" : "В закладки";
         }
@@ -149,6 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (likeBtn && currentUser) {
             const isLiked = recipeLikes.some((item) => Number(item.userId) === Number(currentUser.id));
             likeBtn.classList.toggle("active-like", isLiked);
+            likeBtn.setAttribute("aria-pressed", String(isLiked));
         }
     }
 
@@ -156,6 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!authorSubBtn) return;
         const isSub = Boolean(activeSubscription);
         authorSubBtn.classList.toggle("active-sub", isSub);
+        authorSubBtn.setAttribute("aria-pressed", String(isSub));
         const span = authorSubBtn.querySelector("span");
         if (span) span.textContent = isSub ? "Вы подписаны" : "Подписаться";
     }
@@ -167,31 +170,37 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const multiplier = currentServings / (currentRecipe.servings_base || 2);
-        ingredientsList.innerHTML = (currentRecipe.ingredients || []).map((ing) => {
+        ingredientsList.innerHTML = (currentRecipe.ingredients || []).map((ing, idx) => {
             const scaled = Math.round(ing.amount * multiplier * 10) / 10;
+            const inputId = `ingCheck_${idx}`;
             return `
-        <li class="gl-ingredient-item" role="checkbox" aria-checked="false" tabindex="0">
-          <span class="text-truncate">${escapeHtml(ing.name)}</span>
-          <span class="badge bg-secondary rounded-pill ingredient-amount ms-2">${scaled} ${escapeHtml(ing.unit)}</span>
-        </li>
-      `;
+                <li class="gl-ingredient-item">
+                <div class="form-check d-flex align-items-center w-100 mb-0">
+                    <input class="form-check-input me-2 flex-shrink-0" type="checkbox" id="${inputId}">
+                    <label class="form-check-label d-flex justify-content-between align-items-center w-100 mb-0" for="${inputId}">
+                    <span class="text-truncate">${escapeHtml(ing.name)}</span>
+                    <span class="badge bg-secondary rounded-pill ingredient-amount ms-2">${scaled} ${escapeHtml(ing.unit)}</span>
+                    </label>
+                </div>
+                </li>
+            `;
         }).join("");
     }
 
     function renderSteps() {
         if (!stepsList || !currentRecipe) return;
         stepsList.innerHTML = (currentRecipe.steps || []).map((s) => `
-      <div class="d-flex mb-4">
-        <div class="gl-step-num me-3">${s.step}</div>
-        <div class="w-100">
-          <h6 class="fw-bold mb-1">${escapeHtml(s.title || `Шаг ${s.step}`)}</h6>
-          <p class="text-secondary small mb-2">${escapeHtml(s.description)}</p>
-          ${s.image_url ? `
-            <img src="${s.image_url}" class="rounded-3 border img-fluid mt-1" style="max-height: 160px; object-fit: cover;" alt="Шаг ${s.step}">
-          ` : ""}
-        </div>
-      </div>
-    `).join("");
+            <div class="d-flex mb-4">
+                <div class="gl-step-num me-3">${s.step}</div>
+                <div class="w-100">
+                <h3 class="h6 fw-bold mb-1">${escapeHtml(s.title || `Шаг ${s.step}`)}</h6>
+                <p class="text-secondary small mb-2">${escapeHtml(s.description)}</p>
+                ${s.image_url ? `
+                    <img src="${s.image_url}" class="rounded-3 border img-fluid mt-1" style="max-height: 160px; object-fit: cover;" alt="Шаг ${s.step}">
+                ` : ""}
+                </div>
+            </div>
+            `).join("");
     }
 
     decreaseBtn?.addEventListener("click", () => {
@@ -208,23 +217,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    function toggleIngredientItem(item) {
-        if (!item) return;
-        const checked = item.classList.toggle("checked");
-        item.setAttribute("aria-checked", String(checked));
-    }
-
-    ingredientsList?.addEventListener("click", (e) => {
-        toggleIngredientItem(e.target.closest(".gl-ingredient-item"));
-    });
-
-    ingredientsList?.addEventListener("keydown", (e) => {
-        if (e.key === " " || e.key === "Enter") {
-            const item = e.target.closest(".gl-ingredient-item");
-            if (item) {
-                e.preventDefault();
-                toggleIngredientItem(item);
-            }
+    ingredientsList?.addEventListener("change", (e) => {
+        const checkbox = e.target.closest(".form-check-input");
+        if (!checkbox) return;
+        const item = checkbox.closest(".gl-ingredient-item");
+        if (item) {
+            item.classList.toggle("checked", checkbox.checked);
         }
     });
 
@@ -284,6 +282,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             currentUser.bookmarked_recipe_ids = updatedIds;
 
             saveBtn.classList.toggle("active-save", !isSaved);
+            saveBtn.setAttribute("aria-pressed", String(!isSaved));
             const textSpan = saveBtn.querySelector(".save-text");
             if (textSpan) textSpan.textContent = !isSaved ? "В закладках" : "В закладки";
             showToast(!isSaved ? "Рецепт сохранён в закладки" : "Рецепт удалён из закладок");
