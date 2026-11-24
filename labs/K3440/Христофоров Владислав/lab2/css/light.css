@@ -1,0 +1,39 @@
+/* --- Светлая тема (Light Theme Tokens) --- */
+:root {
+    color-scheme: light;
+
+    --gl-primary: #b84924;
+    --gl-primary-hover: #9c3b1a;
+    --gl-primary-tint: #fbeee8;
+    --gl-primary-tag-text: #9c3b1a;
+    --gl-link: #b84924;
+    --gl-link-hover: #9c3b1a;
+
+    --gl-secondary: #243026;
+    --gl-secondary-hover: #19221a;
+    --gl-secondary-tint: #e8ece9;
+    --gl-secondary-btn: #243026;
+    --gl-secondary-btn-hover: #19221a;
+
+    --gl-bg-body: #f8f6f0;
+    --gl-bg-surface: #ffffff;
+    --gl-bg-subtle: #f0ebe1;
+    --gl-bg-muted: #e4ded2;
+
+    --gl-border: #ded7c8;
+    --gl-border-focus: #b84924;
+
+    --gl-text-primary: #1c1c1a;
+    --gl-text-secondary: #56544d;
+    --gl-text-muted: #66635b;
+
+    --gl-danger: #c0392b;
+    --gl-danger-hover: #a93226;
+    --gl-danger-btn: #c0392b;
+    --gl-danger-tint: #fdf2f2;
+    --gl-success: #27ae60;
+    --gl-success-tint: #eafaf1;
+
+    --gl-shadow-sm: 0 2px 6px rgba(36, 48, 38, 0.04);
+    --gl-shadow-md: 0 6px 16px rgba(36, 48, 38, 0.08);
+}

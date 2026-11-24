@@ -1,0 +1,214 @@
+/* --- Тёмная тема (Dark Theme Tokens & Bootstrap Overrides) --- */
+:root {
+    color-scheme: dark;
+
+    --gl-primary: #c24b23;
+    --gl-primary-hover: #d65a30;
+    --gl-primary-tint: rgba(214, 90, 48, 0.16);
+    --gl-primary-tag-text: #f3a68b;
+    --gl-link: #f28b66;
+    --gl-link-hover: #f7ad92;
+
+    --gl-secondary: #182019;
+    --gl-secondary-hover: #111712;
+    --gl-secondary-tint: rgba(232, 236, 233, 0.12);
+    --gl-secondary-btn: #2e3f31;
+    --gl-secondary-btn-hover: #3b503f;
+
+    --gl-bg-body: #141715;
+    --gl-bg-surface: #1e2320;
+    --gl-bg-subtle: #272e2a;
+    --gl-bg-muted: #323a35;
+
+    --gl-border: #353e39;
+    --gl-border-focus: #e06338;
+
+    --gl-text-primary: #f1efe9;
+    --gl-text-secondary: #bab7ad;
+    --gl-text-muted: #a5a298;
+
+    --gl-danger: #f47c70;
+    --gl-danger-hover: #f89b91;
+    --gl-danger-btn: #c0392b;
+    --gl-danger-tint: rgba(244, 124, 112, 0.15);
+    --gl-success: #4cd480;
+    --gl-success-tint: rgba(76, 212, 128, 0.15);
+
+    --gl-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --gl-shadow-md: 0 8px 20px rgba(0, 0, 0, 0.48);
+
+    --bs-body-color: var(--gl-text-primary);
+    --bs-body-bg: var(--gl-bg-body);
+    --bs-secondary-color: var(--gl-text-secondary);
+    --bs-secondary-bg: var(--gl-bg-muted);
+    --bs-tertiary-color: var(--gl-text-muted);
+    --bs-tertiary-bg: var(--gl-bg-subtle);
+    --bs-emphasis-color: var(--gl-text-primary);
+    --bs-border-color: var(--gl-border);
+    --bs-card-bg: var(--gl-bg-surface);
+    --bs-modal-bg: var(--gl-bg-surface);
+    --bs-dropdown-bg: var(--gl-bg-surface);
+    --bs-list-group-bg: var(--gl-bg-surface);
+}
+
+.bg-white,
+.card,
+.card-footer.bg-white,
+.modal-content,
+.list-group-item {
+    background-color: var(--gl-bg-surface) !important;
+    color: var(--gl-text-primary) !important;
+    border-color: var(--gl-border) !important;
+}
+
+.bg-light,
+.alert-light,
+.modal-header.bg-light,
+.modal-footer.bg-light {
+    background-color: var(--gl-bg-subtle) !important;
+    color: var(--gl-text-primary) !important;
+    border-color: var(--gl-border) !important;
+}
+
+.form-text {
+    color: var(--gl-text-secondary) !important;
+}
+
+.text-dark {
+    color: var(--gl-text-primary) !important;
+}
+
+.text-success {
+    color: var(--gl-success) !important;
+}
+
+.btn-outline-danger,
+.gl-btn-danger-outline.bg-white {
+    color: var(--gl-danger) !important;
+    border-color: var(--gl-danger) !important;
+}
+
+.btn-outline-danger:hover,
+.gl-btn-danger-outline.bg-white:hover {
+    background-color: var(--gl-danger-btn) !important;
+    border-color: var(--gl-danger-btn) !important;
+    color: #ffffff !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--gl-danger-btn) !important;
+    color: #ffffff !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--gl-bg-muted) !important;
+    color: var(--gl-text-primary) !important;
+    border: 1px solid var(--gl-border);
+}
+
+.border,
+.border-top,
+.border-bottom,
+.border-start,
+.border-end {
+    border-color: var(--gl-border) !important;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border);
+}
+
+.form-select {
+    --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f1efe9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-control::file-selector-button {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border);
+}
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+    background-color: var(--gl-bg-muted);
+    color: var(--gl-text-primary);
+}
+
+.form-check-input {
+    background-color: var(--gl-bg-surface);
+    border-color: var(--gl-text-muted);
+}
+
+.form-control::placeholder {
+    color: var(--gl-text-muted);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--gl-bg-surface);
+    color: var(--gl-text-primary);
+    border-color: var(--gl-border-focus);
+}
+
+.form-control[readonly] {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-secondary);
+}
+
+.dropdown-menu {
+    background-color: var(--gl-bg-surface);
+    border: 1px solid var(--gl-border);
+}
+
+.dropdown-item {
+    color: var(--gl-text-primary);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-text-primary);
+}
+
+.pagination .page-link {
+    background-color: var(--gl-bg-surface);
+    border-color: var(--gl-border);
+    color: var(--gl-text-primary);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--gl-bg-subtle);
+    color: var(--gl-link);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: var(--gl-bg-subtle);
+    border-color: var(--gl-border);
+    color: var(--gl-text-muted);
+}
+
+.modal-header:not(.bg-danger) .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.gl-author-bar {
+    background-color: var(--gl-primary-tint);
+    border-color: rgba(214, 90, 48, 0.38);
+}
+
+.gl-toggle-btn.active-save {
+    border-color: var(--gl-primary-tag-text) !important;
+    color: var(--gl-primary-tag-text) !important;
+}
+
+.gl-toggle-btn.active-sub {
+    background-color: var(--gl-secondary-btn) !important;
+    border-color: var(--gl-secondary-btn) !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--gl-text-muted);
+}

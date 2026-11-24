@@ -1,29 +1,49 @@
 /**
- * Модуль управления цветовой темой (Светлая / Тёмная) через CSS-переменные
+ * Модуль управления цветовой темой
  */
 export const Theme = {
     STORAGE_KEY: "gustolab_theme",
 
-    getPreferredTheme() {
-        const saved = localStorage.getItem(this.STORAGE_KEY);
-        if (saved === "light" || saved === "dark") {
-            return saved;
-        }
+    getSystemTheme() {
         const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         return systemDark ? "dark" : "light";
     },
 
-    applyTheme(theme) {
-        const normalized = theme === "dark" ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", normalized);
-        this.syncToggleUI(normalized);
+    getCurrentTheme() {
+        const saved = localStorage.getItem(this.STORAGE_KEY);
+        if (saved === "light" || saved === "dark") {
+            return saved;
+        }
+        return this.getSystemTheme();
+    },
+
+    applyTheme(theme, persist = false) {
+        const lightLink = document.getElementById("themeLightLink");
+        const darkLink = document.getElementById("themeDarkLink");
+
+        if (persist && (theme === "light" || theme === "dark")) {
+            localStorage.setItem(this.STORAGE_KEY, theme);
+        }
+
+        const saved = localStorage.getItem(this.STORAGE_KEY);
+        if (lightLink && darkLink) {
+            if (saved === "light" || saved === "dark") {
+                lightLink.media = saved === "light" ? "all" : "not all";
+                darkLink.media = saved === "dark" ? "all" : "not all";
+            } else {
+                lightLink.media = "(prefers-color-scheme: light)";
+                darkLink.media = "(prefers-color-scheme: dark)";
+            }
+        }
+
+        const activeTheme = saved === "light" || saved === "dark" ? saved : this.getSystemTheme();
+        this.syncToggleUI(activeTheme);
     },
 
     toggleTheme() {
-        const current = document.documentElement.getAttribute("data-theme") || this.getPreferredTheme();
+        const current = this.getCurrentTheme();
         const next = current === "dark" ? "light" : "dark";
-        localStorage.setItem(this.STORAGE_KEY, next);
-        this.applyTheme(next);
+        this.applyTheme(next, true);
     },
 
     syncToggleUI(theme) {
@@ -46,7 +66,7 @@ export const Theme = {
     },
 
     init() {
-        this.applyTheme(this.getPreferredTheme());
+        this.applyTheme(this.getCurrentTheme(), false);
 
         const btn = document.getElementById("themeToggleBtn");
         if (btn && !btn.dataset.themeBound) {
@@ -56,9 +76,9 @@ export const Theme = {
 
         if (window.matchMedia) {
             const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-            mediaQuery.addEventListener("change", (e) => {
+            mediaQuery.addEventListener("change", () => {
                 if (!localStorage.getItem(this.STORAGE_KEY)) {
-                    this.applyTheme(e.matches ? "dark" : "light");
+                    this.applyTheme(this.getSystemTheme(), false);
                 }
             });
         }
